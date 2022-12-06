@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CRUDappMAUI.Pages.AddLeavePage"
+             Title="Add Leave">
+    <ScrollView>
+        <VerticalStackLayout Margin="20" Spacing="10">
+
+
+            <Picker Title="Leave Type" FontSize="Large">
+                <Picker.Items>
+                    <x:String>Annually-Annual Leave</x:String>
+                    <x:String>Casually-Casual Leave</x:String>
+                    <x:String>Maternity-Maternity Leave</x:String>
+                    <x:String>Short-Short Leave</x:String>
+                    
+                </Picker.Items>
+            </Picker>
+
+            <Picker Title="Reason" FontSize="Large">
+                <Picker.Items>
+                    <x:String>Personal-Personal Work</x:String>
+                    <x:String>Sick-Sick</x:String>
+                    <x:String>Training-Training</x:String>
+                   
+                </Picker.Items>
+            </Picker>
+
+            <Label FontSize="Large">Other Reason</Label>
+            <Editor x:Name="editor"
+            Placeholder="Enter your Leave Reason Here"
+            HeightRequest="50"
+            FontSize="Large"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+             
+                <Label FontSize="Large" Grid.Column="0" Grid.Row="0">From Date</Label>
+                <Label FontSize="Large"  Grid.Row="0" Grid.Column="1">To Date</Label>
+                <DatePicker MinimumDate="{Binding MinDate}"
+                    MaximumDate="{Binding MaxDate}"
+                    Date="{Binding SelectedDate1}" 
+                    FontSize="Large"
+                    Grid.Column="0"
+                    Grid.Row="1"        />
+
+
+                <DatePicker 
+                    MinimumDate="{Binding MinDate}"
+                    MaximumDate="{Binding MaxDate}"
+                    Date="{Binding SelectedDate2}" 
+                    FontSize="Large"
+                    Grid.Row="1"
+                    Grid.Column="1"/>
+            </Grid>
+            
+           
+            
+            <Label FontSize="Large">No of Days</Label>
+            <Entry x:Name="days"
+            Placeholder="Enter Days/Hours"
+            FontSize="Large"/>
+            <Label FontSize="Large">Short Leave Start Time</Label>
+            <TimePicker Time="{Binding SelectedTime1}" />
+            <Label FontSize="Large">Short Leave End Time</Label>
+            <TimePicker Time="{Binding SelectedTime2}" />
+
+
+            <Label FontSize="Large">Short Leave Hour</Label>
+            <Entry x:Name="LeaveHour"
+            Placeholder="Enter Short Leave Hour"
+            FontSize="Large"/>
+
+
+
+
+
+            <Grid RowSpacing="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Is First Half Day" Grid.Row="0" Grid.Column="0">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                     Binding="{Binding Source={x:Reference styleSwitch1}, Path=IsToggled}"
+                     Value="true">
+                            <Setter Property="FontAttributes"
+                    Value="Italic, Bold" />
+                            <Setter Property="FontSize"
+                    Value="18" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label Text="Is Second Half Day" Grid.Row="1" Grid.Column="0">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                     Binding="{Binding Source={x:Reference styleSwitch2}, Path=IsToggled}"
+                     Value="true">
+                            <Setter Property="FontAttributes"
+                    Value="Italic, Bold" />
+                            <Setter Property="FontSize"
+                    Value="18" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <Switch x:Name="styleSwitch1"
+                        Grid.Row="0"
+                        Grid.Column="1"/>
+                <Switch x:Name="styleSwitch2" 
+                        Grid.Row="1"
+                        Grid.Column="1"/>
+
+
+                
+            </Grid>
+
+
+            <Button Text="Submit"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+
+    </ScrollView>
+
+</ContentPage>

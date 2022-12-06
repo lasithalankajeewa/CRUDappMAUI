@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CRUDappMAUI.Pages;
+using Microsoft.Extensions.Logging;
 
 namespace CRUDappMAUI;
 
@@ -18,7 +19,9 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddTransient<AddLeavePage>();
 
-		return builder.Build();
+        return builder.Build();
 	}
 }
