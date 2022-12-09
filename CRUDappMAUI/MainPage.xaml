@@ -6,5 +6,24 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Leave" Clicked="OnAddLeaveClicked"/>
     </ContentPage.ToolbarItems>
-    
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding RefreshCommand}">
+
+        <CollectionView x:Name="collectionView"
+                    SelectionMode="Single"
+                    SelectionChanged="OnSelectionChanged"
+                    Margin="30">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding ToDoName}" FontSize="Large"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </RefreshView>
+
 </ContentPage>
