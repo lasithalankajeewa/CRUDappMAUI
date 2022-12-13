@@ -1,11 +1,92 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:CRUDappMAUI.Pages"
+             xmlns:models="clr-namespace:CRUDappMAUI.Models"
              x:Class="CRUDappMAUI.Pages.AddLeavePage"
+             x:DataType="pages:LeaveTypeViewModel"
              Title="Add Leave">
     <ScrollView BackgroundColor="LightGray">
 
         <VerticalStackLayout Margin="20" Spacing="5">
+            <Frame 
+                BorderColor="Gray"
+                CornerRadius="10"
+                Padding="15">
+
+                <StackLayout>
+                    <Label 
+                        Margin="0,0,15,10"
+                        FontAttributes="Bold" 
+                        FontSize="Title" 
+                        Grid.Column="0" 
+                        Grid.Row="0">Leave Summery</Label>
+                    <Frame 
+                        Opacity="0.8"
+                        BackgroundColor="LightBlue"
+                        BorderColor="Gray"
+                        CornerRadius="10"
+                        Padding="15">
+                        <CarouselView Position="{Binding Position}" ItemsSource="{Binding SummeryScreens}">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate x:DataType="models:LeaveType">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition  />
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="Leave Type" Grid.Row="0" Grid.Column="0"/>
+                                        <Label Text="{Binding Type}" Grid.Row="0" Grid.Column="1"/>
+                                        <Label Text="Eligible" Grid.Row="1" Grid.Column="0"/>
+                                        <Label Text="{Binding Eligible}" Grid.Row="1" Grid.Column="1"/>
+                                        <Label Text="Already Taken" Grid.Row="2" Grid.Column="0"/>
+                                        <Label Text="{Binding AlreadyTaken}" Grid.Row="2" Grid.Column="1"/>
+                                        <Label Text="Balance" Grid.Row="3" Grid.Column="0"/>
+                                        <Label Text="{Binding Balance}" Grid.Row="3" Grid.Column="1"/>
+                                        <Label Text="Days/Hour" Grid.Row="4" Grid.Column="0"/>
+                                        <Label Text="{Binding Day_Hour}" Grid.Row="4" Grid.Column="1"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+
+                        </CarouselView>
+                    </Frame>
+                    <StackLayout  Orientation="Horizontal"  
+                       >
+                        <IndicatorView x:Name="indicatorView" 
+                           VerticalOptions="Center"
+                           IndicatorSize="10"
+                           IndicatorColor="LightGray"  
+                           SelectedIndicatorColor="{x:StaticResource Primary}" />
+
+
+                        <Frame 
+                            HorizontalOptions="EndAndExpand"
+                            Padding="0"
+                            CornerRadius="30"
+                            HeightRequest="60" 
+                            WidthRequest="60" 
+                            BackgroundColor="{x:StaticResource Primary}">
+                            <Label Text="{Binding ButtonText}" TextColor="White" 
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center" 
+                                    VerticalTextAlignment="Center" />
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NextCommand}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
             <Frame BorderColor="Gray"
                      CornerRadius="10"
                      Padding="15">
@@ -31,11 +112,18 @@
                             <x:String>Training-Training</x:String>
 
                         </Picker.Items>
+                    </Picker>                    <Picker Title="Reporting Person"  FontAttributes="Bold" FontSize="Medium">
+                        <Picker.Items>
+                            <x:String>001-Kumara</x:String>
+                            <x:String>002-Devinda</x:String>
+                            <x:String>003-Rajesh</x:String>
+
+                        </Picker.Items>
                     </Picker>                    <Label  FontAttributes="Bold" FontSize="Medium">Other Reason</Label>
                     <Editor x:Name="editor"
-                         Placeholder="Enter your Leave Reason Here"
-                         HeightRequest="50"
-                          FontAttributes="Bold" FontSize="Medium"/>
+                            Placeholder="Enter your Leave Reason Here"
+                            HeightRequest="50"
+                            FontAttributes="Bold" FontSize="Medium"/>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -49,40 +137,30 @@
 
                         <Label  FontAttributes="Bold" FontSize="Medium" Grid.Column="0" Grid.Row="0">From Date</Label>
                         <Label  FontAttributes="Bold" FontSize="Medium"  Grid.Row="0" Grid.Column="1">To Date</Label>
-                        <DatePicker MinimumDate="{Binding MinDate}"
-                    MaximumDate="{Binding MaxDate}"
-                    Date="{Binding SelectedDate1}" 
-                    FontAttributes="Bold" FontSize="Medium"
-                    Grid.Column="0"
-                    Grid.Row="1"        />
+                        <DatePicker 
+                            
+                                    x:Name="date1" 
+                                    FontAttributes="Bold" FontSize="Medium"
+                                    Grid.Column="0"
+                                    Grid.Row="1"        />
 
 
                         <DatePicker 
-                    MinimumDate="{Binding MinDate}"
-                    MaximumDate="{Binding MaxDate}"
-                    Date="{Binding SelectedDate2}" 
-                     FontAttributes="Bold" FontSize="Medium"
-                    Grid.Row="1"
-                    Grid.Column="1"/>
+                                    
+                                    x:Name="date2" 
+                                    FontAttributes="Bold" FontSize="Medium"
+                                    Grid.Row="1"
+                                    Grid.Column="1"/>
                     </Grid>
 
 
                     <Label  FontAttributes="Bold" FontSize="Medium">No of Days</Label>
-                    <Entry x:Name="days"
-            Placeholder="Enter Days/Hours"
-            FontAttributes="Bold" FontSize="Medium"
-            Keyboard="Numeric"/>
-                    <Label FontAttributes="Bold" FontSize="Medium">Short Leave Start Time</Label>
-                    <TimePicker Time="{Binding SelectedTime1}" />
-                    <Label  FontAttributes="Bold" FontSize="Medium">Short Leave End Time</Label>
-                    <TimePicker Time="{Binding SelectedTime2}" />
+                    <Entry 
+                        x:Name="days"
+                        Placeholder="Enter Days/Hours"
+                        FontAttributes="Bold" FontSize="Medium"
+                        Keyboard="Numeric"/>
 
-
-                    <Label FontAttributes="Bold" FontSize="Medium">Short Leave Hour</Label>
-                    <Entry x:Name="LeaveHour"
-            Placeholder="Enter Short Leave Hour"
-             FontAttributes="Bold" FontSize="Medium"
-            Keyboard="Numeric"/>
                     <Grid RowSpacing="6">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -99,9 +177,9 @@
                                 <DataTrigger TargetType="Label"
                                              Binding="{Binding Source={x:Reference styleSwitch1}, Path=IsToggled}"
                                              Value="true">
-                                                <Setter Property="FontAttributes"
+                                    <Setter Property="FontAttributes"
                                                         Value="Bold" />
-                                                <Setter Property="FontSize"
+                                    <Setter Property="FontSize"
                                                         Value="Small" />
                                 </DataTrigger>
                             </Label.Triggers>
@@ -129,11 +207,61 @@
 
 
                     </Grid>
-
-
-                   
+
                 </StackLayout>
-            </Frame>
+            </Frame>            <Frame 
+                BorderColor="Gray"
+                CornerRadius="10"
+                Padding="15">
+                
+                <StackLayout>
+                    <Label 
+                       
+                        FontAttributes="Bold" 
+                        FontSize="Title" 
+                        Grid.Column="0" 
+                        Grid.Row="0">Short Leave</Label>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label  FontAttributes="Bold" FontSize="Medium" Grid.Column="0" Grid.Row="0">Short Leave Start Time</Label>
+                        <Label  FontAttributes="Bold" FontSize="Medium"  Grid.Row="0" Grid.Column="1">Short Leave End Time</Label>
+                        
+                        <TimePicker 
+                            FontSize="Medium"
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            x:Name="time1" />
+
+
+                        <TimePicker
+                            FontSize="Medium"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            x:Name="time2" />
+                    </Grid>
+                    
+
+                    <Label FontAttributes="Bold" FontSize="Medium">Short Leave Hour</Label>
+                    <Entry 
+                        x:Name="Leave_Hour"
+                        Placeholder="Enter Short Leave Hour"
+                        FontAttributes="Bold" FontSize="Medium"
+                        Keyboard="Numeric"/>
+                    <Label Text="{Binding Source={x:Reference date1},Path=Date,StringFormat='The TimeSpan is {0:c}'}" FontAttributes="Bold" FontSize="Medium"/>
+                    <Label Text="{Binding Source={x:Reference date2},Path=Date,StringFormat='The TimeSpan is {0:c}'}" FontAttributes="Bold" FontSize="Medium"/>
+
+                </StackLayout>
+               
+            </Frame>
 
 
 

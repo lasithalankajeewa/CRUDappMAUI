@@ -20,7 +20,7 @@ public partial class MainPage : ContentPage
         await Shell.Current.GoToAsync(nameof(AddLeavePage));
     }
 
-    async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+     void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         Debug.WriteLine("--Item Changed clicked");
 
