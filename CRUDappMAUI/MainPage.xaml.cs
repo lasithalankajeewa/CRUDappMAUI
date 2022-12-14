@@ -10,7 +10,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        this.BindingContext=new EmployeeListViewModel();
+        this.BindingContext=new LeaveHistoryViewModel();
     }
 
     async void OnAddLeaveClicked(object sender, EventArgs e)

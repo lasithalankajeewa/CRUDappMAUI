@@ -4,45 +4,77 @@
              xmlns:pages="clr-namespace:CRUDappMAUI.Pages"
              xmlns:models="clr-namespace:CRUDappMAUI.Models"
              x:Class="CRUDappMAUI.MainPage"
-             x:DataType="pages:EmployeeListViewModel"
+             x:DataType="pages:LeaveHistoryViewModel"
             
              Title="Leave Request">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Leave" Clicked="OnAddLeaveClicked"/>
     </ContentPage.ToolbarItems>
     <StackLayout Margin="10,0,10,0" VerticalOptions="FillAndExpand">
-        <Label Text="Grouped Data Demo" FontSize="28" />
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding RefreshCommand}">
         <CollectionView VerticalOptions="FillAndExpand" 
                         IsGrouped="True" 
                         ItemsSource="{Binding Employees}">
             <CollectionView.GroupHeaderTemplate>
-                <DataTemplate x:DataType="models:EmployeeGroup">
+                <DataTemplate x:DataType="models:LeaveHistoryGroup">
                     <HorizontalStackLayout Spacing="5">
                         <Image Source="{Binding GroupIcon}" VerticalOptions="Center" HeightRequest="20" WidthRequest="20" />
                         <Label Text="{Binding GroupTitle}" FontSize="28" />
                         <HorizontalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type pages:EmployeeListViewModel}},Path=AddOrRemoveGroupDataCommand}" CommandParameter="{Binding .}" />
+                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type pages:LeaveHistoryViewModel}},Path=AddOrRemoveGroupDataCommand}" CommandParameter="{Binding .}" />
                         </HorizontalStackLayout.GestureRecognizers>
                     </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.GroupHeaderTemplate>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:EmployeeModel">
+                <DataTemplate x:DataType="models:LeaveHistoryModel">
                     <VerticalStackLayout Margin="0,5,0,5">
-                        <Frame Padding="10" >
-                            <Label VerticalTextAlignment="Center" Text="{Binding FullName}" FontSize="18" />
+                        <Frame Padding="10" 
+                               BackgroundColor="LightGrey">
+                            
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Leave Type"  Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{Binding Leave_Type}" FontSize="Header" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="From Date" Grid.Row="1" Grid.Column="0"/>
+                                <Label Text="{Binding  FromDate}" Grid.Row="1" Grid.Column="1"/>
+                                <Label Text="To Date" Grid.Row="2" Grid.Column="0"/>
+                                <Label Text="{Binding  ToDate}" Grid.Row="2" Grid.Column="1"/>
+                                <Label Text="Days/Hours" Grid.Row="3" Grid.Column="0"/>
+                                <Label Text="{Binding  Days_Hours}" Grid.Row="3" Grid.Column="1"/>
+                                <Label Text="Type" Grid.Row="4" Grid.Column="0"/>
+                                <Label Text="{Binding Type}" Grid.Row="4" Grid.Column="1"/>
+                                <Label Text="Status" Grid.Row="5" Grid.Column="0"/>
+                                <Label Text="{Binding Status}" Grid.Row="5" Grid.Column="1"/>
+                                <Label Text="Leave Reason" Grid.Row="6" Grid.Column="0"/>
+                                <Label Text="{Binding LeaveReason}" Grid.Row="6" Grid.Column="1"/>
+                            </Grid>
+
                         </Frame>
                     </VerticalStackLayout>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-            <!--<CollectionView.GroupFooterTemplate>
-                <DataTemplate x:DataType="models:EmployeeGroup">
-                    <Label Text="{Binding FooterTitle}" FontSize="22" BackgroundColor="LightBlue"/>
+            <CollectionView.GroupFooterTemplate>
+                <DataTemplate x:DataType="models:LeaveHistoryGroup">
+                    <Label Text="{Binding  FooterTitle}" FontSize="22" BackgroundColor="LightBlue"/>
                 </DataTemplate>
-            </CollectionView.GroupFooterTemplate>-->
+            </CollectionView.GroupFooterTemplate>
         </CollectionView>
-
+        </RefreshView>
 
     </StackLayout>
 
