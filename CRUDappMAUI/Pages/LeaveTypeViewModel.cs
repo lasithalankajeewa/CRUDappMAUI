@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace CRUDappMAUI.Pages
 {
-    public class LeaveTypeViewModel:BaseViewModel
+    public class LeaveTypeViewModel : BaseViewModel
     {
         #region Properties
 
@@ -75,11 +75,6 @@ namespace CRUDappMAUI.Pages
         }
 
 
-        public ICommand NextCommand => new Command( () =>
-        {
-           
-                Position += 1;
-           
-        });
+        
     }
 }

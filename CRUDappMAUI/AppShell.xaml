@@ -4,11 +4,51 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CRUDappMAUI"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Home"
+        Title="test"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="Test" >
+
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <VerticalStackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  />
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Filter" Grid.Row="0" Grid.Column="0"/>
+                        
+                        <Label Text="Eligible" Grid.Row="1" Grid.Column="0"/>
+                        <Label Text="{Binding Eligible}" Grid.Row="1" Grid.Column="1"/>
+                        <Label Text="Already Taken" Grid.Row="2" Grid.Column="0"/>
+                        <Label Text="{Binding AlreadyTaken}" Grid.Row="2" Grid.Column="1"/>
+                        <Label Text="Balance" Grid.Row="3" Grid.Column="0"/>
+                        <Label Text="{Binding Balance}" Grid.Row="3" Grid.Column="1"/>
+                        <Label Text="Days/Hour" Grid.Row="4" Grid.Column="0"/>
+                        <Label Text="{Binding Day_Hour}" Grid.Row="4" Grid.Column="1"/>
+                    </Grid>
+                    
+                </VerticalStackLayout>
+               
+
+            </DataTemplate>
+        </Shell.ItemTemplate>
+
+
+    </ShellContent>
+
+   
 
 </Shell>

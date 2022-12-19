@@ -8,11 +8,36 @@
             
              Title="Leave Request">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Leave" Clicked="OnAddLeaveClicked"/>
+        <ToolbarItem Text="Apply Leave" Clicked="OnAddLeaveClicked"/>
     </ContentPage.ToolbarItems>
     <StackLayout Margin="10,0,10,0" VerticalOptions="FillAndExpand">
-        <RefreshView IsRefreshing="{Binding IsRefreshing}"
-             Command="{Binding RefreshCommand}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+               
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Sort By:" FontAttributes="Bold"  Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+
+            <!--<Picker HorizontalTextAlignment="Center" Title="" FontAttributes="Bold" FontSize="Small" Grid.Row="0" Grid.Column="1" SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>Leave Type</x:String>
+                    <x:String>From Date</x:String>
+                    <x:String>To Date</x:String>
+                    <x:String>Days/Hours</x:String>
+                    <x:String>Type</x:String>
+                    <x:String>Status</x:String>
+                    <x:String>Leave Reason</x:String>
+
+                </Picker.Items>
+            </Picker>-->
+
+        </Grid>
+
+        <RefreshView >
         <CollectionView VerticalOptions="FillAndExpand" 
                         IsGrouped="True" 
                         ItemsSource="{Binding Employees}">

@@ -67,22 +67,7 @@
                            SelectedIndicatorColor="{x:StaticResource Primary}" />
 
 
-                        <Frame 
-                            HorizontalOptions="EndAndExpand"
-                            Padding="0"
-                            CornerRadius="30"
-                            HeightRequest="60" 
-                            WidthRequest="60" 
-                            BackgroundColor="{x:StaticResource Primary}">
-                            <Label Text="{Binding ButtonText}" TextColor="White" 
-                                    FontSize="18"
-                                    FontAttributes="Bold"
-                                    HorizontalTextAlignment="Center" 
-                                    VerticalTextAlignment="Center" />
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding NextCommand}" />
-                            </Frame.GestureRecognizers>
-                        </Frame>
+                        
                     </StackLayout>
 
                 </StackLayout>
@@ -96,7 +81,7 @@
                             Opacity="0.8" />
                 </Frame.Shadow>
                 <StackLayout Spacing="10">
-                    
+
                     <Picker Title="Leave Type" FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>Annually-Annual Leave</x:String>
@@ -105,25 +90,28 @@
                             <x:String>Short-Short Leave</x:String>
 
                         </Picker.Items>
-                    </Picker>                    <Picker Title="Reason"  FontAttributes="Bold" FontSize="Medium">
+                    </Picker>
+                    <Picker Title="Reason"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>Personal-Personal Work</x:String>
                             <x:String>Sick-Sick</x:String>
                             <x:String>Training-Training</x:String>
 
                         </Picker.Items>
-                    </Picker>                    <Picker Title="Reporting Person"  FontAttributes="Bold" FontSize="Medium">
+                    </Picker>
+                    <Picker Title="Reporting Person"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>001-Kumara</x:String>
                             <x:String>002-Devinda</x:String>
                             <x:String>003-Rajesh</x:String>
 
                         </Picker.Items>
-                    </Picker>                    <Label  FontAttributes="Bold" FontSize="Medium">Other Reason</Label>
+                    </Picker>
+                    <Label  FontAttributes="Bold" FontSize="Medium">Other Reason</Label>
                     <Editor x:Name="editor"
                             Placeholder="Enter your Leave Reason Here"
                             HeightRequest="50"
-                            FontAttributes="Bold" FontSize="Medium"/>
+                            FontAttributes="Bold" FontSize="Medium"/>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -207,13 +195,13 @@
 
 
                     </Grid>
-
                 </StackLayout>
-            </Frame>            <Frame 
+            </Frame>
+            <Frame 
                 BorderColor="Gray"
                 CornerRadius="10"
                 Padding="15">
-                
+
                 <StackLayout>
                     <Label 
                        
@@ -234,7 +222,7 @@
 
                         <Label  FontAttributes="Bold" FontSize="Medium" Grid.Column="0" Grid.Row="0">Short Leave Start Time</Label>
                         <Label  FontAttributes="Bold" FontSize="Medium"  Grid.Row="0" Grid.Column="1">Short Leave End Time</Label>
-                        
+
                         <TimePicker 
                             FontSize="Medium"
                             Grid.Column="0"
@@ -248,7 +236,7 @@
                             Grid.Row="1"
                             x:Name="time2" />
                     </Grid>
-                    
+
 
                     <Label FontAttributes="Bold" FontSize="Medium">Short Leave Hour</Label>
                     <Entry 
@@ -260,8 +248,8 @@
                     <Label Text="{Binding Source={x:Reference date2},Path=Date,StringFormat='The TimeSpan is {0:c}'}" FontAttributes="Bold" FontSize="Medium"/>
 
                 </StackLayout>
-               
-            </Frame>
+
+            </Frame>
 
 
 

@@ -1,4 +1,5 @@
-﻿using CRUDappMAUI.Pages;
+﻿using CommunityToolkit.Maui.Views;
+using CRUDappMAUI.Pages;
 using System.Diagnostics;
 
 namespace CRUDappMAUI;
@@ -11,6 +12,7 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
         this.BindingContext=new LeaveHistoryViewModel();
+       
     }
 
     async void OnAddLeaveClicked(object sender, EventArgs e)
@@ -26,6 +28,22 @@ public partial class MainPage : ContentPage
         Debug.WriteLine("--Item Changed clicked");
 
 
+    }
+
+    public void IsRefreshing()
+    {
+        Debug.WriteLine("--IS refresh Clicked");
+    }
+
+    async void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
+
+        if (selectedIndex != -1)
+        {
+            this.ShowPopup(new SortPopup());
+        }
     }
 
 }
