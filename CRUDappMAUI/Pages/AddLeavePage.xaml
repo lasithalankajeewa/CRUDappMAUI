@@ -10,7 +10,7 @@
 
         <VerticalStackLayout Margin="20" Spacing="5">
             <Frame 
-                BorderColor="Gray"
+                
                 CornerRadius="10"
                 Padding="15">
 
@@ -21,58 +21,94 @@
                         FontSize="Title" 
                         Grid.Column="0" 
                         Grid.Row="0">Leave Summery</Label>
+                   
+
                     <Frame 
+                        
                         Opacity="0.8"
                         BackgroundColor="LightBlue"
-                        BorderColor="Gray"
+                        
                         CornerRadius="10"
                         Padding="15">
-                        <CarouselView Position="{Binding Position}" ItemsSource="{Binding SummeryScreens}">
-                            <CarouselView.ItemTemplate>
-                                <DataTemplate x:DataType="models:LeaveType">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition  />
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Text="Leave Type" Grid.Row="0" Grid.Column="0"/>
-                                        <Label Text="{Binding Type}" Grid.Row="0" Grid.Column="1"/>
-                                        <Label Text="Eligible" Grid.Row="1" Grid.Column="0"/>
-                                        <Label Text="{Binding Eligible}" Grid.Row="1" Grid.Column="1"/>
-                                        <Label Text="Already Taken" Grid.Row="2" Grid.Column="0"/>
-                                        <Label Text="{Binding AlreadyTaken}" Grid.Row="2" Grid.Column="1"/>
-                                        <Label Text="Balance" Grid.Row="3" Grid.Column="0"/>
-                                        <Label Text="{Binding Balance}" Grid.Row="3" Grid.Column="1"/>
-                                        <Label Text="Days/Hour" Grid.Row="4" Grid.Column="0"/>
-                                        <Label Text="{Binding Day_Hour}" Grid.Row="4" Grid.Column="1"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </CarouselView.ItemTemplate>
+                        <StackLayout>
+                            <Grid
+                                >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
 
-                        </CarouselView>
-                    </Frame>
-                    <StackLayout  Orientation="Horizontal"  
-                       >
-                        <IndicatorView x:Name="indicatorView" 
-                           VerticalOptions="Center"
-                           IndicatorSize="10"
-                           IndicatorColor="LightGray"  
-                           SelectedIndicatorColor="{x:StaticResource Primary}" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  />
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition  />
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
 
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Leave Type" Grid.Row="0" Grid.Column="0"/>
 
+                                <Label Text="Eligible" Grid.Row="0" Grid.Column="1"/>
+
+                                <Label Text="Already Taken" Grid.Row="0" Grid.Column="2"/>
+
+                                <Label Text="Balance" Grid.Row="0" Grid.Column="3"/>
+
+                                <Label Text="Days/Hour" Grid.Row="0" Grid.Column="4"/>
+
+                            </Grid>
+                            
+
+                                <CollectionView 
+                                 ItemsSource="{Binding SummeryScreens}"
+                                 SelectionMode="None"
+                                 HorizontalOptions="Center"
+                                 >
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:LeaveType">
+                                        <Frame 
                         
-                    </StackLayout>
+                                    Opacity="0.8"
+                                    BackgroundColor="LightGray"
+                                    
+                                    CornerRadius="5"
+                                    Padding="5">
+                                            <VerticalStackLayout>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+
+
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Type}" Grid.Row="0" Grid.Column="0"/>
+                                                <Label Text="{Binding Eligible}" Grid.Row="0" Grid.Column="1"/>
+                                                <Label Text="{Binding AlreadyTaken}" Grid.Row="0" Grid.Column="2"/>
+                                                <Label Text="{Binding Balance}" Grid.Row="0" Grid.Column="3"/>
+                                                <Label Text="{Binding Day_Hour}" Grid.Row="0" Grid.Column="4"/>
+
+                                            </Grid>
+                                            </VerticalStackLayout>
+                                        </Frame>
+
+                                    </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            
+                        </StackLayout>
+                    </Frame>
+                    
 
                 </StackLayout>
             </Frame>
-            <Frame BorderColor="Gray"
+            <Frame  
                      CornerRadius="10"
                      Padding="15">
                 <Frame.Shadow>
@@ -198,7 +234,7 @@
                 </StackLayout>
             </Frame>
             <Frame 
-                BorderColor="Gray"
+                
                 CornerRadius="10"
                 Padding="15">
 
@@ -212,12 +248,12 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="50   "/>
 
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <Label  FontAttributes="Bold" FontSize="Medium" Grid.Column="0" Grid.Row="0">Short Leave Start Time</Label>
@@ -244,8 +280,7 @@
                         Placeholder="Enter Short Leave Hour"
                         FontAttributes="Bold" FontSize="Medium"
                         Keyboard="Numeric"/>
-                    <Label Text="{Binding Source={x:Reference date1},Path=Date,StringFormat='The TimeSpan is {0:c}'}" FontAttributes="Bold" FontSize="Medium"/>
-                    <Label Text="{Binding Source={x:Reference date2},Path=Date,StringFormat='The TimeSpan is {0:c}'}" FontAttributes="Bold" FontSize="Medium"/>
+                    
 
                 </StackLayout>
 
@@ -256,13 +291,6 @@
             <Button Text="Submit"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
-
-
-
-
-
-
-
 
 
         </VerticalStackLayout>

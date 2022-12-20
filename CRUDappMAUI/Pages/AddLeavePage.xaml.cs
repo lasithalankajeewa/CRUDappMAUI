@@ -13,7 +13,7 @@ public partial class AddLeavePage : ContentPage
 	{
 		InitializeComponent();
 		this.BindingContext = new LeaveTypeViewModel();
-
+		
 
 
 
