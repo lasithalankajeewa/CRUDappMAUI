@@ -176,7 +176,7 @@ namespace CRUDappMAUI.DataModel
             LoggedUsers usr = new LoggedUsers();
             try
             {
-                _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6Ikxhc2l0aGEuQkwiLCJuYmYiOjE2NzE1MDk3MTQsImV4cCI6MTY3MTUxMDAxNCwiaWF0IjoxNjcxNTA5NzE0fQ.ZpSd6fUsDPNFyDSsm8e-RdS0IrYp03A6dAV7BIn0HBk");
+                _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6Ikxhc2l0aGEuQkwiLCJuYmYiOjE2NzE1MjIzMDIsImV4cCI6MTY3MTUyMjYwMiwiaWF0IjoxNjcxNTIyMzAyfQ.cJVcoZnSPzp27MP0bIY1HsZH18pb2mZMzNMXFTNduiI");
                 var response = await _httpClient.PostAsJsonAsync(TokenEndpoints.Get_Already_Applied_Leave_EndPoint, usr);
                 await response.Content.LoadIntoBufferAsync();
                 string content = response.Content.ReadAsStringAsync().Result;
@@ -259,6 +259,7 @@ namespace CRUDappMAUI.DataModel
             IList<LeaveSummary> leaves = new List<LeaveSummary>();
             try
             {
+                _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6Ikxhc2l0aGEuQkwiLCJuYmYiOjE2NzE1MjIzMDIsImV4cCI6MTY3MTUyMjYwMiwiaWF0IjoxNjcxNTIyMzAyfQ.cJVcoZnSPzp27MP0bIY1HsZH18pb2mZMzNMXFTNduiI");
                 var response = await _httpClient.PostAsJsonAsync(TokenEndpoints.Get_Leave_Summary_EndPoint, levDet);
                 await response.Content.LoadIntoBufferAsync();
                 string content = response.Content.ReadAsStringAsync().Result;

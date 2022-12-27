@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CRUDappMAUI.Pages"
              xmlns:models="clr-namespace:CRUDappMAUI.Models"
+             xmlns:viewmodel="clr-namespace:CRUDappMAUI.ViewModel"
              x:Class="CRUDappMAUI.Pages.AddLeavePage"
-             x:DataType="pages:LeaveTypeViewModel"
+            
+             x:DataType="viewmodel:AddLeaveViewModel"
              Title="Add Leave">
+    <!--x:DataType="pages:LeaveTypeViewModel"-->
     <ScrollView BackgroundColor="LightGray">
 
         <VerticalStackLayout Margin="20" Spacing="5">
@@ -59,7 +62,7 @@
                             
 
                                 <CollectionView 
-                                 ItemsSource="{Binding SummeryScreens}"
+                                 ItemsSource="{Binding Items}"
                                  SelectionMode="None"
                                  HorizontalOptions="Center"
                                  >
@@ -118,7 +121,7 @@
                 </Frame.Shadow>
                 <StackLayout Spacing="10">
 
-                    <Picker Title="Leave Type" FontAttributes="Bold" FontSize="Medium">
+                    <Picker x:Name="LeaveType"  Title="Leave Type" FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>Annually-Annual Leave</x:String>
                             <x:String>Casually-Casual Leave</x:String>
@@ -127,7 +130,7 @@
 
                         </Picker.Items>
                     </Picker>
-                    <Picker Title="Reason"  FontAttributes="Bold" FontSize="Medium">
+                    <Picker x:Name="Reason" Title="Reason"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>Personal-Personal Work</x:String>
                             <x:String>Sick-Sick</x:String>
@@ -135,7 +138,7 @@
 
                         </Picker.Items>
                     </Picker>
-                    <Picker Title="Reporting Person"  FontAttributes="Bold" FontSize="Medium">
+                    <Picker x:Name="ReportingPerson" Title="Reporting Person"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>001-Kumara</x:String>
                             <x:String>002-Devinda</x:String>
@@ -144,7 +147,8 @@
                         </Picker.Items>
                     </Picker>
                     <Label  FontAttributes="Bold" FontSize="Medium">Other Reason</Label>
-                    <Editor x:Name="editor"
+                    <Editor x:Name="OtherReason"
+                            Text="{Binding Text}"
                             Placeholder="Enter your Leave Reason Here"
                             HeightRequest="50"
                             FontAttributes="Bold" FontSize="Medium"/>
@@ -163,7 +167,7 @@
                         <Label  FontAttributes="Bold" FontSize="Medium"  Grid.Row="0" Grid.Column="1">To Date</Label>
                         <DatePicker 
                             
-                                    x:Name="date1" 
+                                    x:Name="fromdate" 
                                     FontAttributes="Bold" FontSize="Medium"
                                     Grid.Column="0"
                                     Grid.Row="1"        />
@@ -171,7 +175,7 @@
 
                         <DatePicker 
                                     
-                                    x:Name="date2" 
+                                    x:Name="todate" 
                                     FontAttributes="Bold" FontSize="Medium"
                                     Grid.Row="1"
                                     Grid.Column="1"/>
@@ -180,7 +184,7 @@
 
                     <Label  FontAttributes="Bold" FontSize="Medium">No of Days</Label>
                     <Entry 
-                        x:Name="days"
+                        x:Name="noDays"
                         Placeholder="Enter Days/Hours"
                         FontAttributes="Bold" FontSize="Medium"
                         Keyboard="Numeric"/>
@@ -197,7 +201,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label   FontSize="Small" Text="Is First Half Day" Grid.Row="0" Grid.Column="0">
-                            <Label.Triggers>
+                            <!--<Label.Triggers>
                                 <DataTrigger TargetType="Label"
                                              Binding="{Binding Source={x:Reference styleSwitch1}, Path=IsToggled}"
                                              Value="true">
@@ -206,10 +210,10 @@
                                     <Setter Property="FontSize"
                                                         Value="Small" />
                                 </DataTrigger>
-                            </Label.Triggers>
+                            </Label.Triggers>-->
                         </Label>
                         <Label  FontSize="Small" Text="Is Second Half Day" Grid.Row="1" Grid.Column="0">
-                            <Label.Triggers>
+                            <!--<Label.Triggers>
                                 <DataTrigger TargetType="Label"
                                                 Binding="{Binding Source={x:Reference styleSwitch2}, Path=IsToggled}"
                                                 Value="true">
@@ -218,13 +222,13 @@
                                     <Setter Property="FontSize"
                                             Value="Medium" />
                                 </DataTrigger>
-                            </Label.Triggers>
+                            </Label.Triggers>-->
                         </Label>
 
-                        <Switch x:Name="styleSwitch1"
+                        <Switch x:Name="Switch1"
                         Grid.Row="0"
                         Grid.Column="1"/>
-                        <Switch x:Name="styleSwitch2" 
+                        <Switch x:Name="Switch2" 
                         Grid.Row="1"
                         Grid.Column="1"/>
 
@@ -290,7 +294,8 @@
 
             <Button Text="Submit"
                 VerticalOptions="Center"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                Clicked="OnSubmitClicked"/>
 
 
         </VerticalStackLayout>
