@@ -1,4 +1,5 @@
 using CRUDappMAUI.Models;
+using CRUDappMAUI.ViewModel;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -13,10 +14,11 @@ public partial class AddLeavePage : ContentPage
     public AddLeavePage()
 	{
 		InitializeComponent();
-        this.BindingContext = new LeaveTypeViewModel();
+        //this.BindingContext = new LeaveTypeViewModel();
         //this.BindingContext = this;
+        AddLeaveViewModel leavemodel=new AddLeaveViewModel();
+        this.BindingContext= leavemodel;
 		
-
 
 
 	}

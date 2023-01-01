@@ -121,7 +121,7 @@
                 </Frame.Shadow>
                 <StackLayout Spacing="10">
 
-                    <Picker x:Name="LeaveType"  Title="Leave Type" FontAttributes="Bold" FontSize="Medium">
+                    <Picker x:Name="LeaveType" SelectedItem="{Binding Pick1}"  Title="Leave Type" FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>Annually-Annual Leave</x:String>
                             <x:String>Casually-Casual Leave</x:String>
@@ -129,8 +129,15 @@
                             <x:String>Short-Short Leave</x:String>
 
                         </Picker.Items>
+                        <!--<x:Array Type="{x:Type x:String}">
+                            <x:String>Annually-Annual Leave</x:String>
+                            <x:String>Casually-Casual Leave</x:String>
+                            <x:String>Maternity-Maternity Leave</x:String>
+                            <x:String>Short-Short Leave</x:String>
+
+                        </x:Array>-->
                     </Picker>
-                    <Picker x:Name="Reason" Title="Reason"  FontAttributes="Bold" FontSize="Medium">
+                    <Picker x:Name="Reason" SelectedItem="{Binding Pick2}" Title="Reason"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>Personal-Personal Work</x:String>
                             <x:String>Sick-Sick</x:String>
@@ -138,7 +145,7 @@
 
                         </Picker.Items>
                     </Picker>
-                    <Picker x:Name="ReportingPerson" Title="Reporting Person"  FontAttributes="Bold" FontSize="Medium">
+                    <Picker x:Name="ReportingPerson" SelectedItem="{Binding Pick3}" Title="Reporting Person"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>001-Kumara</x:String>
                             <x:String>002-Devinda</x:String>
@@ -148,7 +155,7 @@
                     </Picker>
                     <Label  FontAttributes="Bold" FontSize="Medium">Other Reason</Label>
                     <Editor x:Name="OtherReason"
-                            Text="{Binding Text}"
+                            Text="{Binding Text1,Mode=TwoWay}"
                             Placeholder="Enter your Leave Reason Here"
                             HeightRequest="50"
                             FontAttributes="Bold" FontSize="Medium"/>
@@ -167,7 +174,8 @@
                         <Label  FontAttributes="Bold" FontSize="Medium"  Grid.Row="0" Grid.Column="1">To Date</Label>
                         <DatePicker 
                             
-                                    x:Name="fromdate" 
+                                    x:Name="fromdate"
+                                    Date="{Binding Date1}"
                                     FontAttributes="Bold" FontSize="Medium"
                                     Grid.Column="0"
                                     Grid.Row="1"        />
@@ -175,7 +183,8 @@
 
                         <DatePicker 
                                     
-                                    x:Name="todate" 
+                                    x:Name="todate"
+                                    Date="{Binding Date2}"
                                     FontAttributes="Bold" FontSize="Medium"
                                     Grid.Row="1"
                                     Grid.Column="1"/>
@@ -185,6 +194,7 @@
                     <Label  FontAttributes="Bold" FontSize="Medium">No of Days</Label>
                     <Entry 
                         x:Name="noDays"
+                        Text="{Binding Nodays,Mode=TwoWay}"
                         Placeholder="Enter Days/Hours"
                         FontAttributes="Bold" FontSize="Medium"
                         Keyboard="Numeric"/>
@@ -226,11 +236,13 @@
                         </Label>
 
                         <Switch x:Name="Switch1"
-                        Grid.Row="0"
-                        Grid.Column="1"/>
-                        <Switch x:Name="Switch2" 
-                        Grid.Row="1"
-                        Grid.Column="1"/>
+                                IsToggled="{Binding Firsthalf}"
+                                Grid.Row="0"
+                                Grid.Column="1"/>
+                        <Switch x:Name="Switch2"
+                                IsToggled="{Binding Secondhalf}"
+                                Grid.Row="1"
+                                Grid.Column="1"/>
 
 
 
@@ -264,6 +276,7 @@
                         <Label  FontAttributes="Bold" FontSize="Medium"  Grid.Row="0" Grid.Column="1">Short Leave End Time</Label>
 
                         <TimePicker 
+                            Time="{Binding Time1}"
                             FontSize="Medium"
                             Grid.Column="0"
                             Grid.Row="1"
@@ -271,6 +284,7 @@
 
 
                         <TimePicker
+                            Time="{Binding Time2}"
                             FontSize="Medium"
                             Grid.Column="1"
                             Grid.Row="1"
@@ -281,6 +295,7 @@
                     <Label FontAttributes="Bold" FontSize="Medium">Short Leave Hour</Label>
                     <Entry 
                         x:Name="Leave_Hour"
+                        Text="{Binding Leavehours}"
                         Placeholder="Enter Short Leave Hour"
                         FontAttributes="Bold" FontSize="Medium"
                         Keyboard="Numeric"/>
@@ -295,7 +310,7 @@
             <Button Text="Submit"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                Clicked="OnSubmitClicked"/>
+                Command="{Binding SubmitClickedCommand}"/>
 
 
         </VerticalStackLayout>

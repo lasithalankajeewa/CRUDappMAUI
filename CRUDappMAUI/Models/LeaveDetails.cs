@@ -95,6 +95,9 @@ namespace CRUDappMAUI.Models
     }
     public class LeaveSummary
     {
+        public int CompanyId { get; set; }
+        public int UserKey { get; set; }
+        public string Year { get; set; }   
         public long EmpKy { get; set; }
         public int LeaveTypeKy { get; set; }
         public int Elagible { get; set; }
