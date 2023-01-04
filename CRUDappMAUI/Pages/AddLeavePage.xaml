@@ -198,6 +198,7 @@
                         Placeholder="Enter Days/Hours"
                         FontAttributes="Bold" FontSize="Medium"
                         Keyboard="Numeric"/>
+                    <!--<Label Text="{Binding Nodays,Mode=TwoWay}"  FontSize="Medium"/>-->
 
                     <Grid RowSpacing="6">
                         <Grid.RowDefinitions>
@@ -235,12 +236,13 @@
                             </Label.Triggers>-->
                         </Label>
 
-                        <Switch x:Name="Switch1"
-                                IsToggled="{Binding Firsthalf}"
+                        <Switch x:Name="Switch1"      
                                 Grid.Row="0"
+                                Toggled="Switch1_Toggled"
                                 Grid.Column="1"/>
                         <Switch x:Name="Switch2"
-                                IsToggled="{Binding Secondhalf}"
+                                IsToggled="{Binding Secondhalf,Mode=TwoWay}"
+                                Toggled="Switch2_Toggled"
                                 Grid.Row="1"
                                 Grid.Column="1"/>
 
@@ -298,7 +300,8 @@
                         Text="{Binding Leavehours}"
                         Placeholder="Enter Short Leave Hour"
                         FontAttributes="Bold" FontSize="Medium"
-                        Keyboard="Numeric"/>
+                        Keyboard="Numeric"
+                        />
                     
 
                 </StackLayout>

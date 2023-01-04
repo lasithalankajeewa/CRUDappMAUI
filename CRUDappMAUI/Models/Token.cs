@@ -16,7 +16,7 @@ namespace CRUDappMAUI.Models
 
         public int EmpKy { get; set; }
 
-        public LeaveTypes CodeKey { get; set; }
+        public LeaveTypesParam LeaveType { get; set; }
 
         public int LeaveTrnKy { get; set; }
 
@@ -28,7 +28,7 @@ namespace CRUDappMAUI.Models
 
         public string LevDays { get; set; } 
 
-        public LevReason  CodeKey2 { get; set; } 
+        public LevReasonParam LevReason { get; set; } 
         
         public bool IsFirstHalf { get; set; }
 
@@ -50,12 +50,12 @@ namespace CRUDappMAUI.Models
 
     }
 
-    public class LeaveTypes
+    public class LeaveTypesParam
     {
         public int CodeKey { get; set; }
     }
 
-    public class LevReason
+    public class LevReasonParam
     {
         public int CodeKey { get; set; }
     }

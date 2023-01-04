@@ -10,14 +10,14 @@ public partial class AddLeavePage : ContentPage
 {
 	public DateTime SelectedDate { get; set; }
     //public string Title { get; set; }
-
+    AddLeaveViewModel leavemodel;
     public AddLeavePage()
 	{
 		InitializeComponent();
         //this.BindingContext = new LeaveTypeViewModel();
         //this.BindingContext = this;
-        AddLeaveViewModel leavemodel=new AddLeaveViewModel();
-        this.BindingContext= leavemodel;
+         leavemodel=new AddLeaveViewModel();
+        this.BindingContext= leavemodel;    
 		
 
 
@@ -31,4 +31,13 @@ public partial class AddLeavePage : ContentPage
         
     }
 
+    private void Switch1_Toggled(object sender, ToggledEventArgs e)
+    {
+        leavemodel.OnToggleSwitch(e.Value);
+    }
+
+    private void Switch2_Toggled(object sender, ToggledEventArgs e)
+    {
+        leavemodel.OnToggleSwitch2(e.Value);
+    }
 }

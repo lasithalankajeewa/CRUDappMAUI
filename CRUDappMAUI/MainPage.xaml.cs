@@ -1,5 +1,6 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿//using CommunityToolkit.Maui.Views;
 using CRUDappMAUI.Pages;
+using CRUDappMAUI.ViewModel;
 using System.Diagnostics;
 
 namespace CRUDappMAUI;
@@ -11,7 +12,9 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        this.BindingContext=new LeaveHistoryViewModel();
+        //this.BindingContext=new LeaveHistoryViewModel();
+        MainpageViewModel model= new MainpageViewModel();
+        this.BindingContext= model;
        
     }
 
@@ -35,16 +38,16 @@ public partial class MainPage : ContentPage
         Debug.WriteLine("--IS refresh Clicked");
     }
 
-    async void OnPickerSelectedIndexChanged(object sender, EventArgs e)
-    {
-        var picker = (Picker)sender;
-        int selectedIndex = picker.SelectedIndex;
+    //async void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    var picker = (Picker)sender;
+    //    int selectedIndex = picker.SelectedIndex;
 
-        if (selectedIndex != -1)
-        {
-            this.ShowPopup(new SortPopup());
-        }
-    }
+    //    if (selectedIndex != -1)
+    //    {
+    //        this.ShowPopup(new SortPopup());
+    //    }
+    //}
 
 }
 

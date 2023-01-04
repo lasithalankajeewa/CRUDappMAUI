@@ -69,7 +69,7 @@
 
        
 
-        <RefreshView >
+        <RefreshView    >
         <CollectionView VerticalOptions="FillAndExpand" 
                         IsGrouped="True" 
                         ItemsSource="{Binding Employees}">
