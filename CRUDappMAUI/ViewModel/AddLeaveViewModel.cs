@@ -1,17 +1,14 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Views;
 using CRUDappMAUI.Models;
-using Microsoft.Maui.Devices.Sensors;
+using CRUDappMAUI.Pages;
+using Newtonsoft.Json;
 using RestSharp;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace CRUDappMAUI.ViewModel
@@ -20,20 +17,24 @@ namespace CRUDappMAUI.ViewModel
     {
         public AddLeaveViewModel()
         {
-            //Items = new ObservableCollection<string>();
+            
             this.GetLeaveSummery();
-           // this.ToggleSwitch();
-
-          //  Thread thread = new Thread(ToggleSwitch);
-           // thread.Start();
+           
             
         }
+
+        [ObservableProperty]
+        ObservableCollection<LeaveSumModel> _LItems;
+
 
         [ObservableProperty]
         ObservableCollection<string> _Items;
 
         [ObservableProperty]
         string _pick1;
+
+        [ObservableProperty]
+        int _pick1Index;
 
         [ObservableProperty]
         string _pick2;
@@ -43,9 +44,6 @@ namespace CRUDappMAUI.ViewModel
 
         [ObservableProperty]
         string _text1;
-
-        //[ObservableProperty]
-        //string text2;
 
         [ObservableProperty]
         DateTime _date1 = DateTime.Today;
@@ -62,20 +60,29 @@ namespace CRUDappMAUI.ViewModel
         [ObservableProperty]
         bool _secondhalf;
 
-
-       
+        [ObservableProperty]
+        DateTime _time1=DateTime.Now;
 
         [ObservableProperty]
-        DateTime _time1;
+        DateTime _time2=DateTime.Now;
 
         [ObservableProperty]
-        DateTime _time2;
+        bool _time1IsEnabled = false;
+
+        [ObservableProperty]
+        bool _time2IsEnabled=false;
 
         [ObservableProperty]
         TimeSpan _leavehours;
 
+        [ObservableProperty]
+        bool _leavehoursIsEnabled=false;
 
-   
+        [ObservableProperty]
+        bool _IsPopUp=false;
+
+
+
 
         public void OnToggleSwitch( bool IsOn)
         {
@@ -92,6 +99,27 @@ namespace CRUDappMAUI.ViewModel
 
         }
 
+        public void OnPickerChanged()
+        {
+            if (Pick1Index == 3)
+            {
+
+                Time1IsEnabled = true;
+                Time2IsEnabled = true;
+                LeavehoursIsEnabled = true;
+
+            }
+            else {
+
+                Time1IsEnabled = false;
+                Time2IsEnabled = false;
+                LeavehoursIsEnabled = false;
+            }
+
+
+        }
+
+        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJMYXNpdGhhLkJMIiwiTGFzaXRoYS5CTCJdLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwiRmlyc3ROYW1lIjoiTGFzaXRoYS5CTCIsIlVzZXJJZCI6Ikxhc2l0aGEuQkwiLCJFbWFpbCI6Ik5vIEVtYWlsIiwiQ0NEIjoiREMiLCJyb2xlIjoiQ29tcGFueUF1dGhTdWNjZXNzIiwibmJmIjoxNjczMTE2NzY5LCJleHAiOjE2NzMxNTk5NjksImlhdCI6MTY3MzExNjc2OX0.5N569HAZ04HvIX55KIkdRR7MrC20v7Sfl2VCfxZnFmI";
 
 
 
@@ -100,6 +128,7 @@ namespace CRUDappMAUI.ViewModel
         {
             try
             {
+
                 TimeSpan difference = Date2 - Date1;
                 Nodays = difference.Days;
                 Debug.WriteLine(_pick1);
@@ -114,6 +143,7 @@ namespace CRUDappMAUI.ViewModel
                 Debug.WriteLine(_time1);
                 Debug.WriteLine(_time2);
                 Debug.WriteLine(_leavehours);
+                Debug.WriteLine(_pick1Index);
 
                 //trigger switch
                 if (Firsthalf)
@@ -130,7 +160,7 @@ namespace CRUDappMAUI.ViewModel
 
                 //TimeSpan datevar = _date2 - _date1;
                 //leavehours = time2 - time1;
-                Debug.WriteLine("No Hours:" + _leavehours);
+                Debug.WriteLine("Picker1:" + _pick1Index);
 
                 Debug.WriteLine("No Days:" + Nodays);
 
@@ -148,7 +178,7 @@ namespace CRUDappMAUI.ViewModel
                 tok.EmpKy = 874258;
 
                 LeaveTypesParam lt = new LeaveTypesParam();
-                lt.CodeKey = 1;
+                lt.CodeKey = 221681;
 
 
                 LevReasonParam lr = new LevReasonParam();
@@ -156,18 +186,18 @@ namespace CRUDappMAUI.ViewModel
                 tok.LevReason = lr;
                 tok.LeaveType = lt;
                 tok.LeaveTrnKy = 1;
-                tok.LeaveTrnTypKy = 1;
+                tok.LeaveTrnTypKy = 221749;
                 tok.EftvDt = "01/01/2022";
-                tok.ToD = "03/01/2022";
-                tok.LevDays = "3";
+                tok.ToD = "01/01/2022";
+                tok.LevDays = "1";
                 tok.IsFirstHalf = false;
                 tok.IsSecondHalf = false;
-                tok.IsAct = false;
+                tok.IsAct = true;
                 tok.AcsLvlKy = 1;
                 tok.ConFinLvlKy = 1;
-                tok.ReporterKy = 1;
-                tok.Rem = "test";
-                tok.ReqDate = "04/01/2022";
+                tok.ReporterKy = 727795;
+                tok.Rem = "des";
+                tok.ReqDate = "01/01/2022";
 
 
 
@@ -175,30 +205,44 @@ namespace CRUDappMAUI.ViewModel
 
                 //client.Timeout = -1;
                 //var request = new RestRequest("http://localhost:62185/api/HR/ApplyLeave").AddJsonBody(tok);
-                var request = new RestRequest("https://bl360x.com/BLECOMTEST/api/HR/ApplyLeave").AddJsonBody(tok);
-                request.Method = Method.Post;
-                request.AddHeader("Accept", "application/json");
+                //var request = new RestRequest("https://bl360x.com/BLECOMTEST/api/HR/ApplyLeave").AddJsonBody(tok);
+                //request.Method = Method.Post;
+                //request.AddHeader("Accept", "application/json");
 
-                request.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
-                request.AddHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJMYXNpdGhhLkJMIiwiTGFzaXRoYS5CTCJdLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwiRmlyc3ROYW1lIjoiTGFzaXRoYS5CTCIsIlVzZXJJZCI6Ikxhc2l0aGEuQkwiLCJFbWFpbCI6Ik5vIEVtYWlsIiwiQ0NEIjoiREMiLCJyb2xlIjoiQ29tcGFueUF1dGhTdWNjZXNzIiwibmJmIjoxNjcyODI3MjczLCJleHAiOjE2NzI4NzA0NzMsImlhdCI6MTY3MjgyNzI3M30.vZ6w7hz79lRvnkFgM8XfrlrcHkhGM6NpOx10Uqz72Lc");
-                request.AddHeader("Content-Type", "application/json");
+                //request.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
+                //request.AddHeader("Authorization", tokn);
+                //request.AddHeader("Content-Type", "application/json");
+
+                //IsPopUp= true;
+                //RestResponse response = await client.PostAsync(request);
+
+                //var client2 = new RestClient("http://bl360x.com/BLEcomTest/api");
+                //var client = new RestClient("http://10.0.2.2:62185/api");
+                var request2 = new RestRequest("http://bl360x.com/BLEcomTest/api/HR/ApplyLeave").AddJsonBody(tok);
+                request2.Method = Method.Post;
+                request2.AddHeader("Accept", "application/json");
+
+                request2.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
+                request2.AddHeader("Authorization", tokn);
+                request2.AddHeader("Content-Type", "application/json");
 
 
-                RestResponse response = await client.PostAsync(request);
+                RestResponse response2 = await client.PostAsync(request2);
 
 
-
-                // Check the status code of the response
-                if (response.StatusCode == HttpStatusCode.OK)
+                // check the status code of the response
+                if (response2.StatusCode == HttpStatusCode.OK)
                 {
-                    // Read the response data
-                    var responseContent = response.Content.ToString();
+                    // read the response data
+                    var responsecontent = response2.Content.ToString();
 
-                    Console.WriteLine(responseContent);
+                    Debug.WriteLine("submit succesful!!!");
+
+                    //console.writeline(responsecontent);
                 }
                 else
                 {
-                    Console.WriteLine("Request failed with status code: " + response.StatusCode);
+                    Debug.WriteLine("request failed with status code: " + response2.StatusCode);
                 }
 
 
@@ -214,7 +258,7 @@ namespace CRUDappMAUI.ViewModel
         }
 
         //get leave summery 
-        public async Task<string> GetLeaveSummery()
+        public async Task<ObservableCollection<LeaveSumModel>> GetLeaveSummery()
         {
             try
 
@@ -228,14 +272,14 @@ namespace CRUDappMAUI.ViewModel
                 ls.Year = "2022/01/01";
 
 
-                var client = new RestClient("http://bl360x.com/BLEcomTest/api/HR/LoadLeaveSummary");
+               var client = new RestClient("http://bl360x.com/BLEcomTest/api");
                 //var client = new RestClient("http://10.0.2.2:62185/api");
                 var request = new RestRequest("/HR/LoadLeaveSummary").AddJsonBody(ls);
                 request.Method = Method.Post;
                 request.AddHeader("Accept", "application/json");
 
                 request.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
-                request.AddHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJMYXNpdGhhLkJMIiwiTGFzaXRoYS5CTCJdLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwiRmlyc3ROYW1lIjoiTGFzaXRoYS5CTCIsIlVzZXJJZCI6Ikxhc2l0aGEuQkwiLCJFbWFpbCI6Ik5vIEVtYWlsIiwiQ0NEIjoiREMiLCJyb2xlIjoiQ29tcGFueUF1dGhTdWNjZXNzIiwibmJmIjoxNjcyODI3MjczLCJleHAiOjE2NzI4NzA0NzMsImlhdCI6MTY3MjgyNzI3M30.vZ6w7hz79lRvnkFgM8XfrlrcHkhGM6NpOx10Uqz72Lc");
+                request.AddHeader("Authorization", tokn);
                 request.AddHeader("Content-Type", "application/json");
 
 
@@ -249,9 +293,18 @@ namespace CRUDappMAUI.ViewModel
                     // Read the response data
                     var responseContent = response.Content.ToString();
 
-                    Console.WriteLine(responseContent);
-                    Debug.WriteLine(responseContent);
+                    List<LeaveSumModel> leaveItem = JsonConvert.DeserializeObject<List<LeaveSumModel>>(responseContent);
+
+                    LItems= new ObservableCollection<LeaveSumModel>(leaveItem);
+
                     
+
+                    //Debug.WriteLine(leaveItem[0].LeaveType);
+                    //Debug.WriteLine(LItems[0].Taken);
+
+                    return LItems;
+
+
 
                 }
                 else
@@ -262,13 +315,12 @@ namespace CRUDappMAUI.ViewModel
             catch (Exception e)
             {
                Debug.WriteLine(e);
-                // Handle not supported on device exception
+                //Handle not supported on device exception
             }
 
 
-            return "None";
 
-
+            return null;
 
         }
     }

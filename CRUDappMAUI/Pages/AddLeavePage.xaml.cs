@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using CRUDappMAUI.Models;
 using CRUDappMAUI.ViewModel;
 using System.Collections.ObjectModel;
@@ -17,11 +18,18 @@ public partial class AddLeavePage : ContentPage
         //this.BindingContext = new LeaveTypeViewModel();
         //this.BindingContext = this;
          leavemodel=new AddLeaveViewModel();
-        this.BindingContext= leavemodel;    
-		
+        this.BindingContext= leavemodel;
+
+        if (leavemodel.IsPopUp) {
+            var popup = new SortPopup();
+            this.ShowPopup(popup);
+        }
 
 
-	}
+
+
+
+    }
 
      void OnSubmitClicked(object sender, EventArgs e)
     {
@@ -39,5 +47,10 @@ public partial class AddLeavePage : ContentPage
     private void Switch2_Toggled(object sender, ToggledEventArgs e)
     {
         leavemodel.OnToggleSwitch2(e.Value);
+    }
+
+    private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        leavemodel.OnPickerChanged();
     }
 }

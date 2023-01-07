@@ -4,6 +4,7 @@
              xmlns:pages="clr-namespace:CRUDappMAUI.Pages"
              xmlns:models="clr-namespace:CRUDappMAUI.Models"
              xmlns:viewmodel="clr-namespace:CRUDappMAUI.ViewModel"
+             xmlns:controls="clr-namespace:Microsoft.Toolkit.Maui.Controls;assembly=Microsoft.Toolkit.Maui.Community"
              x:Class="CRUDappMAUI.Pages.AddLeavePage"
             
              x:DataType="viewmodel:AddLeaveViewModel"
@@ -62,13 +63,13 @@
                             
 
                                 <CollectionView 
-                                 ItemsSource="{Binding Items}"
+                                 ItemsSource="{Binding LItems}"
                                  SelectionMode="None"
                                  HorizontalOptions="Center"
                                  >
 
                                     <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:LeaveType">
+                                        <DataTemplate x:DataType="models:LeaveSumModel">
                                         <Frame 
                         
                                     Opacity="0.8"
@@ -91,11 +92,11 @@
                                                     <ColumnDefinition/>
 
                                                 </Grid.ColumnDefinitions>
-                                                <Label Text="{Binding Type}" Grid.Row="0" Grid.Column="0"/>
-                                                <Label Text="{Binding Eligible}" Grid.Row="0" Grid.Column="1"/>
-                                                <Label Text="{Binding AlreadyTaken}" Grid.Row="0" Grid.Column="2"/>
-                                                <Label Text="{Binding Balance}" Grid.Row="0" Grid.Column="3"/>
-                                                <Label Text="{Binding Day_Hour}" Grid.Row="0" Grid.Column="4"/>
+                                                <Label Text="{Binding LeaveType}" Grid.Row="0" Grid.Column="0"/>
+                                                <Label Text="{Binding Elagible}" Grid.Row="0" Grid.Column="1"/>
+                                                <Label Text="{Binding Taken}" Grid.Row="0" Grid.Column="2"/>
+                                                <Label Text="{Binding Bal}" Grid.Row="0" Grid.Column="3"/>
+                                                <Label Text="{Binding IsCd01}" Grid.Row="0" Grid.Column="4"/>
 
                                             </Grid>
                                             </VerticalStackLayout>
@@ -121,7 +122,7 @@
                 </Frame.Shadow>
                 <StackLayout Spacing="10">
 
-                    <Picker x:Name="LeaveType" SelectedItem="{Binding Pick1}"  Title="Leave Type" FontAttributes="Bold" FontSize="Medium">
+                    <Picker x:Name="LeaveType" SelectedIndex="{Binding Pick1Index}" SelectedIndexChanged="OnPickerSelectedIndexChanged"  SelectedItem="{Binding Pick1}"  Title="Leave Type" FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>Annually-Annual Leave</x:String>
                             <x:String>Casually-Casual Leave</x:String>
@@ -236,7 +237,8 @@
                             </Label.Triggers>-->
                         </Label>
 
-                        <Switch x:Name="Switch1"      
+                        <Switch x:Name="Switch1"
+                                IsToggled="{Binding Firsthalf,Mode=TwoWay}"
                                 Grid.Row="0"
                                 Toggled="Switch1_Toggled"
                                 Grid.Column="1"/>
@@ -282,7 +284,8 @@
                             FontSize="Medium"
                             Grid.Column="0"
                             Grid.Row="1"
-                            x:Name="time1" />
+                            x:Name="time1"
+                            IsEnabled="{Binding Time1IsEnabled}"/>
 
 
                         <TimePicker
@@ -290,7 +293,8 @@
                             FontSize="Medium"
                             Grid.Column="1"
                             Grid.Row="1"
-                            x:Name="time2" />
+                            x:Name="time2"
+                            IsEnabled="{Binding Time2IsEnabled}"/>
                     </Grid>
 
 
@@ -301,6 +305,7 @@
                         Placeholder="Enter Short Leave Hour"
                         FontAttributes="Bold" FontSize="Medium"
                         Keyboard="Numeric"
+                        IsEnabled="{Binding LeavehoursIsEnabled}"
                         />
                     
 
@@ -315,6 +320,8 @@
                 HorizontalOptions="Center"
                 Command="{Binding SubmitClickedCommand}"/>
 
+
+            
 
         </VerticalStackLayout>
 

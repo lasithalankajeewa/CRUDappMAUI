@@ -14,5 +14,7 @@ namespace CRUDappMAUI.Models
         public int AlreadyTaken { get; set; }
         public int Balance { get; set; }
         public int Day_Hour { get; set; }
+
+
     }
 }
