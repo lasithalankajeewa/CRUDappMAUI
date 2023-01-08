@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CRUDappMAUI.Pages"
              xmlns:models="clr-namespace:CRUDappMAUI.Models"
+             xmlns:viewmodel="clr-namespace:CRUDappMAUI.ViewModel"
              x:Class="CRUDappMAUI.MainPage"
-             x:DataType="pages:LeaveHistoryViewModel"
+             x:DataType="viewmodel:MainpageViewModel"
             
              Title="Leave Request">
     <ContentPage.ToolbarItems>
@@ -20,7 +21,7 @@
                 <ColumnDefinition  />
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Text="Sort By:" FontAttributes="Bold"  Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+            <!--<Label Text="Sort By:" FontAttributes="Bold"  Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>-->
 
             <!--<Picker HorizontalTextAlignment="Center" Title="" FontAttributes="Bold" FontSize="Small" Grid.Row="0" Grid.Column="1" SelectedIndexChanged="OnPickerSelectedIndexChanged">
                 <Picker.Items>
@@ -72,7 +73,7 @@
         <RefreshView    >
         <CollectionView VerticalOptions="FillAndExpand" 
                         IsGrouped="True" 
-                        ItemsSource="{Binding Employees}">
+                        ItemsSource="{Binding LHItems}">
            
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:LeaveHistoryModel">

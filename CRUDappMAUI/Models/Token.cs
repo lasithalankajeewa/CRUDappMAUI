@@ -22,11 +22,11 @@ namespace CRUDappMAUI.Models
 
         public int LeaveTrnTypKy { get; set; }
 
-        public string EftvDt { get; set; }
+        public DateTime EftvDt { get; set; }
 
-        public string ToD { get; set; }
+        public DateTime ToD { get; set; }
 
-        public string LevDays { get; set; } 
+        public int LevDays { get; set; } 
 
         public LevReasonParam LevReason { get; set; } 
         
@@ -44,7 +44,7 @@ namespace CRUDappMAUI.Models
 
         public string Rem { get; set; }
 
-        public string ReqDate { get; set; }
+        public DateTime ReqDate { get; set; }
 
        
 

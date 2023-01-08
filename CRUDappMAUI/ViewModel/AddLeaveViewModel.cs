@@ -9,7 +9,7 @@ using RestSharp;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net;
-
+using System.Windows.Input;
 
 namespace CRUDappMAUI.ViewModel
 {
@@ -19,6 +19,7 @@ namespace CRUDappMAUI.ViewModel
         {
             
             this.GetLeaveSummery();
+            
            
             
         }
@@ -119,8 +120,16 @@ namespace CRUDappMAUI.ViewModel
 
         }
 
-        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJMYXNpdGhhLkJMIiwiTGFzaXRoYS5CTCJdLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwiRmlyc3ROYW1lIjoiTGFzaXRoYS5CTCIsIlVzZXJJZCI6Ikxhc2l0aGEuQkwiLCJFbWFpbCI6Ik5vIEVtYWlsIiwiQ0NEIjoiREMiLCJyb2xlIjoiQ29tcGFueUF1dGhTdWNjZXNzIiwibmJmIjoxNjczMTE2NzY5LCJleHAiOjE2NzMxNTk5NjksImlhdCI6MTY3MzExNjc2OX0.5N569HAZ04HvIX55KIkdRR7MrC20v7Sfl2VCfxZnFmI";
+        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJMYXNpdGhhLkJMIiwiTGFzaXRoYS5CTCJdLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwiRmlyc3ROYW1lIjoiTGFzaXRoYS5CTCIsIlVzZXJJZCI6Ikxhc2l0aGEuQkwiLCJFbWFpbCI6Ik5vIEVtYWlsIiwiQ0NEIjoiREMiLCJyb2xlIjoiQ29tcGFueUF1dGhTdWNjZXNzIiwibmJmIjoxNjczMTYzODg0LCJleHAiOjE2NzMyMDcwODQsImlhdCI6MTY3MzE2Mzg4NH0.PfpdCea6fqyPEJNuEvMK-1FNJ1mzbBbO-T3Yy-Yac04";
 
+        public ICommand ShowPopupCommand { get; }
+
+        private bool ShowPopup()
+        {
+            var popup = new SortPopup();
+            Shell.Current.ShowPopup(popup);
+            return true;
+        }
 
 
         [RelayCommand]
@@ -131,6 +140,9 @@ namespace CRUDappMAUI.ViewModel
 
                 TimeSpan difference = Date2 - Date1;
                 Nodays = difference.Days;
+
+                TimeSpan TimeDiff=Time2-Time1;
+                Leavehours = TimeDiff;
                 Debug.WriteLine(_pick1);
                 Debug.WriteLine(_pick2);
                 Debug.WriteLine(_pick3);
@@ -158,13 +170,14 @@ namespace CRUDappMAUI.ViewModel
                 }
 
 
-                //TimeSpan datevar = _date2 - _date1;
-                //leavehours = time2 - time1;
-                Debug.WriteLine("Picker1:" + _pick1Index);
 
-                Debug.WriteLine("No Days:" + Nodays);
 
+
+                //popup
                 
+
+
+
 
 
                 //post request
@@ -187,62 +200,79 @@ namespace CRUDappMAUI.ViewModel
                 tok.LeaveType = lt;
                 tok.LeaveTrnKy = 1;
                 tok.LeaveTrnTypKy = 221749;
-                tok.EftvDt = "01/01/2022";
-                tok.ToD = "01/01/2022";
-                tok.LevDays = "1";
-                tok.IsFirstHalf = false;
-                tok.IsSecondHalf = false;
+                tok.EftvDt = Date1;
+                tok.ToD = Date2;
+                tok.LevDays = Nodays;
+                tok.IsFirstHalf = Firsthalf;
+                tok.IsSecondHalf = Secondhalf;
                 tok.IsAct = true;
                 tok.AcsLvlKy = 1;
                 tok.ConFinLvlKy = 1;
                 tok.ReporterKy = 727795;
                 tok.Rem = "des";
-                tok.ReqDate = "01/01/2022";
+                tok.ReqDate = DateTime.Today;
+
+                if (Pick1Index == 3) {
+                    
+                }
 
 
 
 
+                ////var client2 = new RestClient("http://bl360x.com/BLEcomTest/api");
+                ////var client = new RestClient("http://10.0.2.2:62185/api");
+                //var request2 = new RestRequest("http://bl360x.com/BLEcomTest/api/HR/ApplyLeave").AddJsonBody(tok);
+                //request2.Method = Method.Post;
+                //request2.AddHeader("Accept", "application/json");
 
-                //client.Timeout = -1;
-                //var request = new RestRequest("http://localhost:62185/api/HR/ApplyLeave").AddJsonBody(tok);
-                //var request = new RestRequest("https://bl360x.com/BLECOMTEST/api/HR/ApplyLeave").AddJsonBody(tok);
-                //request.Method = Method.Post;
-                //request.AddHeader("Accept", "application/json");
-
-                //request.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
-                //request.AddHeader("Authorization", tokn);
-                //request.AddHeader("Content-Type", "application/json");
-
-                //IsPopUp= true;
-                //RestResponse response = await client.PostAsync(request);
-
-                //var client2 = new RestClient("http://bl360x.com/BLEcomTest/api");
-                //var client = new RestClient("http://10.0.2.2:62185/api");
-                var request2 = new RestRequest("http://bl360x.com/BLEcomTest/api/HR/ApplyLeave").AddJsonBody(tok);
-                request2.Method = Method.Post;
-                request2.AddHeader("Accept", "application/json");
-
-                request2.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
-                request2.AddHeader("Authorization", tokn);
-                request2.AddHeader("Content-Type", "application/json");
+                //request2.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
+                //request2.AddHeader("Authorization", tokn);
+                //request2.AddHeader("Content-Type", "application/json");
 
 
-                RestResponse response2 = await client.PostAsync(request2);
+                //RestResponse response2 = await client.PostAsync(request2);
 
 
-                // check the status code of the response
-                if (response2.StatusCode == HttpStatusCode.OK)
+                //// check the status code of the response
+                //if (response2.StatusCode == HttpStatusCode.OK)
+                //{
+                //    // read the response data
+                //    var responsecontent = response2.Content.ToString();
+
+                //    Debug.WriteLine("submit succesful!!!");
+
+
+                //}
+                //else
+                //{
+                //    Debug.WriteLine("request failed with status code: " + response2.StatusCode);
+                //}
+
+
+                var request = new RestRequest("http://bl360x.com/BLEcomTest/api/HR/ApplyLeave").AddJsonBody(tok);
+                request.Method = Method.Post;
+                request.AddHeader("Accept", "application/json");
+
+                request.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
+                request.AddHeader("Authorization", tokn);
+                request.AddHeader("Content-Type", "application/json");
+
+                RestResponse response = await client.PostAsync(request);
+
+
+
+                // Check the status code of the response
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    // read the response data
-                    var responsecontent = response2.Content.ToString();
+                    // Read the response data
+                    var responseContent = response.Content.ToString();
 
-                    Debug.WriteLine("submit succesful!!!");
-
-                    //console.writeline(responsecontent);
+                    Debug.WriteLine(responseContent);
+                    ShowPopup();
                 }
                 else
                 {
-                    Debug.WriteLine("request failed with status code: " + response2.StatusCode);
+                    Debug.WriteLine("Request failed with status code: " + response.StatusCode);
                 }
 
 

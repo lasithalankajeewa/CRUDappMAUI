@@ -4,7 +4,6 @@
              xmlns:pages="clr-namespace:CRUDappMAUI.Pages"
              xmlns:models="clr-namespace:CRUDappMAUI.Models"
              xmlns:viewmodel="clr-namespace:CRUDappMAUI.ViewModel"
-             xmlns:controls="clr-namespace:Microsoft.Toolkit.Maui.Controls;assembly=Microsoft.Toolkit.Maui.Community"
              x:Class="CRUDappMAUI.Pages.AddLeavePage"
             
              x:DataType="viewmodel:AddLeaveViewModel"
@@ -198,7 +197,8 @@
                         Text="{Binding Nodays,Mode=TwoWay}"
                         Placeholder="Enter Days/Hours"
                         FontAttributes="Bold" FontSize="Medium"
-                        Keyboard="Numeric"/>
+                        Keyboard="Numeric"
+                        IsEnabled="False"/>
                     <!--<Label Text="{Binding Nodays,Mode=TwoWay}"  FontSize="Medium"/>-->
 
                     <Grid RowSpacing="6">

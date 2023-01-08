@@ -10,13 +10,12 @@ public partial class AddLeavePage : ContentPage
 
 {
 	public DateTime SelectedDate { get; set; }
-    //public string Title { get; set; }
+    
     AddLeaveViewModel leavemodel;
     public AddLeavePage()
 	{
 		InitializeComponent();
-        //this.BindingContext = new LeaveTypeViewModel();
-        //this.BindingContext = this;
+        
          leavemodel=new AddLeaveViewModel();
         this.BindingContext= leavemodel;
 

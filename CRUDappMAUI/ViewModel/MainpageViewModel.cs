@@ -1,45 +1,59 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CRUDappMAUI.Models;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static Android.Content.ClipData;
 
 namespace CRUDappMAUI.ViewModel
 {
-    public partial class MainpageViewModel:ObservableObject
+    public partial class MainpageViewModel: ObservableObject
+
     {
 
+        [ObservableProperty]
+        ObservableCollection<LeaveHistoryModel> _LHItems;
+
+
         public MainpageViewModel() {
-            this.IsRefeshing();
+            this.GetAppliedLeave();
         
         }
 
-        
-        public async void IsRefeshing()
+        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJMYXNpdGhhLkJMIiwiTGFzaXRoYS5CTCJdLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwiRmlyc3ROYW1lIjoiTGFzaXRoYS5CTCIsIlVzZXJJZCI6Ikxhc2l0aGEuQkwiLCJFbWFpbCI6Ik5vIEVtYWlsIiwiQ0NEIjoiREMiLCJyb2xlIjoiQ29tcGFueUF1dGhTdWNjZXNzIiwibmJmIjoxNjczMTYzODg0LCJleHAiOjE2NzMyMDcwODQsImlhdCI6MTY3MzE2Mzg4NH0.PfpdCea6fqyPEJNuEvMK-1FNJ1mzbBbO-T3Yy-Yac04";
+
+
+
+
+        public async Task<ObservableCollection<LeaveHistoryModel>> GetAppliedLeave()
         {
-            Debug.WriteLine("Refeshing");
             try
 
             {
-                AlraedyApplyLeaveToken Atok=new AlraedyApplyLeaveToken();
+                Debug.WriteLine("Get Leave History is running");
+                AlraedyApplyLeaveToken aalt = new AlraedyApplyLeaveToken();
 
-                Atok.CompanyId = 156;
-                Atok.UserKey = 342922;
+                aalt.CompanyId = 156;
+                aalt.UserKey = 342922;
+                
 
 
-                var client = new RestClient();
-                var request = new RestRequest("http://10.0.2.2:62185/api/HR/GetAlreadyAppliedLeaves").AddJsonBody(Atok);
+                var client = new RestClient("http://bl360x.com/BLEcomTest/api");
+                //var client = new RestClient("http://10.0.2.2:62185/api");
+                var request = new RestRequest("HR/GetAlreadyAppliedLeaves").AddJsonBody(aalt);
                 request.Method = Method.Post;
                 request.AddHeader("Accept", "application/json");
 
                 request.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
-                request.AddHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ikxhc2l0aGEuQkwiLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwicm9sZSI6IlVzZXIiLCJGaXJzdE5hbWUiOiJMYXNpdGhhLkJMIiwiTGFzdE5hbWUiOiJMYXNpdGhhLkJMIiwiVXNlcklkIjoiTGFzaXRoYS5CTCIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiItLU5PTkNFLS0iLCJuYmYiOjE2NzI2MzI2NDIsImV4cCI6MTY3MjY3NTg0MiwiaWF0IjoxNjcyNjMyNjQyfQ.DoEbpoUIrQvnAFo7aWT-kEoiksS-sXARRzfA3e0dFOc");
+                request.AddHeader("Authorization", tokn);
                 request.AddHeader("Content-Type", "application/json");
 
 
@@ -53,8 +67,17 @@ namespace CRUDappMAUI.ViewModel
                     // Read the response data
                     var responseContent = response.Content.ToString();
 
-                    Console.WriteLine(responseContent);
-                    Debug.WriteLine(responseContent);
+                    List<LeaveHistoryModel> leaveItem = JsonConvert.DeserializeObject<List<LeaveHistoryModel>>(responseContent);
+
+                    LHItems = new ObservableCollection<LeaveHistoryModel>(leaveItem);
+
+
+
+                    //Debug.WriteLine(leaveItem[0].LeaveType);
+                    //Debug.WriteLine(LItems[0].Taken);
+
+                    return LHItems;
+
 
 
                 }
@@ -65,12 +88,16 @@ namespace CRUDappMAUI.ViewModel
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                // Handle not supported on device exception
+                Debug.WriteLine(e);
+                //Handle not supported on device exception
             }
+
+
+
+            return null;
 
         }
 
-       
+
     }
 }

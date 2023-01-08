@@ -12,7 +12,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        //this.BindingContext=new LeaveHistoryViewModel();
+        
         MainpageViewModel model= new MainpageViewModel();
         this.BindingContext= model;
        

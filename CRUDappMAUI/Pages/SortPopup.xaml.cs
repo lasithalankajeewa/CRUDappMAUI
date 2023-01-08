@@ -8,4 +8,12 @@ public partial class SortPopup : Popup
 	{
 		InitializeComponent();
 	}
+
+	async void OnOKButtonClicked(object? sender, EventArgs e) 
+	{
+
+		Close();
+        await Shell.Current.GoToAsync("MainPage");
+    }
+
 }
