@@ -62,10 +62,10 @@ namespace CRUDappMAUI.ViewModel
         bool _secondhalf;
 
         [ObservableProperty]
-        DateTime _time1=DateTime.Now;
+        TimeSpan _time1;
 
         [ObservableProperty]
-        DateTime _time2=DateTime.Now;
+        TimeSpan _time2;
 
         [ObservableProperty]
         bool _time1IsEnabled = false;
@@ -74,7 +74,7 @@ namespace CRUDappMAUI.ViewModel
         bool _time2IsEnabled=false;
 
         [ObservableProperty]
-        TimeSpan _leavehours;
+        double _leavehours;
 
         [ObservableProperty]
         bool _leavehoursIsEnabled=false;
@@ -100,6 +100,19 @@ namespace CRUDappMAUI.ViewModel
 
         }
 
+        public void OnDate2Chaged() {
+            TimeSpan difference = Date2 - Date1;
+            Nodays = difference.Days;
+
+        }
+
+        public void OnTime2Chaged()
+        {
+            TimeSpan span = Time2.Subtract(Time1);
+            Leavehours = span.Hours;
+
+        }
+
         public void OnPickerChanged()
         {
             if (Pick1Index == 3)
@@ -107,7 +120,7 @@ namespace CRUDappMAUI.ViewModel
 
                 Time1IsEnabled = true;
                 Time2IsEnabled = true;
-                LeavehoursIsEnabled = true;
+                //LeavehoursIsEnabled = true;
 
             }
             else {
@@ -120,7 +133,7 @@ namespace CRUDappMAUI.ViewModel
 
         }
 
-        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJMYXNpdGhhLkJMIiwiTGFzaXRoYS5CTCJdLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwiRmlyc3ROYW1lIjoiTGFzaXRoYS5CTCIsIlVzZXJJZCI6Ikxhc2l0aGEuQkwiLCJFbWFpbCI6Ik5vIEVtYWlsIiwiQ0NEIjoiREMiLCJyb2xlIjoiQ29tcGFueUF1dGhTdWNjZXNzIiwibmJmIjoxNjczMTYzODg0LCJleHAiOjE2NzMyMDcwODQsImlhdCI6MTY3MzE2Mzg4NH0.PfpdCea6fqyPEJNuEvMK-1FNJ1mzbBbO-T3Yy-Yac04";
+        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJJc2hhbi5EQyIsIklzaGFuLkRDIl0sIm5hbWVpZCI6IklzaGFuLkRDIiwiRmlyc3ROYW1lIjoiSXNoYW4uREMiLCJVc2VySWQiOiJJc2hhbi5EQyIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiJEQyIsInJvbGUiOiJDb21wYW55QXV0aFN1Y2Nlc3MiLCJuYmYiOjE2NzMyNjAyODUsImV4cCI6MTY3MzMwMzQ4NSwiaWF0IjoxNjczMjYwMjg1fQ.4E_yVM3t6wuraM58_YqlvjwbZR9uux2tgvmEBHTURsI";
 
         public ICommand ShowPopupCommand { get; }
 
@@ -138,11 +151,6 @@ namespace CRUDappMAUI.ViewModel
             try
             {
 
-                TimeSpan difference = Date2 - Date1;
-                Nodays = difference.Days;
-
-                TimeSpan TimeDiff=Time2-Time1;
-                Leavehours = TimeDiff;
                 Debug.WriteLine(_pick1);
                 Debug.WriteLine(_pick2);
                 Debug.WriteLine(_pick3);
@@ -154,7 +162,7 @@ namespace CRUDappMAUI.ViewModel
                 Debug.WriteLine(_secondhalf);
                 Debug.WriteLine(_time1);
                 Debug.WriteLine(_time2);
-                Debug.WriteLine(_leavehours);
+                //Debug.WriteLine(span.Hours);
                 Debug.WriteLine(_pick1Index);
 
                 //trigger switch
@@ -170,86 +178,37 @@ namespace CRUDappMAUI.ViewModel
                 }
 
 
-
-
-
-                //popup
-                
-
-
-
-
-
                 //post request
 
-                var client = new RestClient();
-                Token tok = new Token();
-
-                tok.CompanyId = 156;
-                tok.UserKey = 342922;
-                tok.ObjKy = 1;
-                tok.EmpKy = 874258;
-
-                LeaveTypesParam lt = new LeaveTypesParam();
+                Leaverequest insertBody = new Leaverequest();
+                insertBody.ObjKy = 1;
+                insertBody.EmpKy = 874258;
+                CodeBaseResponse lt = new CodeBaseResponse();
                 lt.CodeKey = 221681;
 
-
-                LevReasonParam lr = new LevReasonParam();
+                CodeBaseResponse lr = new CodeBaseResponse();
                 lr.CodeKey = 1;
-                tok.LevReason = lr;
-                tok.LeaveType = lt;
-                tok.LeaveTrnKy = 1;
-                tok.LeaveTrnTypKy = 221749;
-                tok.EftvDt = Date1;
-                tok.ToD = Date2;
-                tok.LevDays = Nodays;
-                tok.IsFirstHalf = Firsthalf;
-                tok.IsSecondHalf = Secondhalf;
-                tok.IsAct = true;
-                tok.AcsLvlKy = 1;
-                tok.ConFinLvlKy = 1;
-                tok.ReporterKy = 727795;
-                tok.Rem = "des";
-                tok.ReqDate = DateTime.Today;
 
-                if (Pick1Index == 3) {
-                    
-                }
+                insertBody.LeaveType = lt;
+                insertBody.LevReason = lr;
+                insertBody.LeaveTrnKy = 1;
+                insertBody.LeaveTrnTypKy = 221749;
+                insertBody.EftvDt = Date1;
+                insertBody.ToD = Date2;
+                insertBody.LevDays = Nodays+1;
+                insertBody.IsFirstHalf = Firsthalf;
+                insertBody.IsSecondHalf = Secondhalf;
+                insertBody.IsAct =1;
+                insertBody.AcsLvlKy = 1;
+                insertBody.ConFinLvlKy = 1;
+                insertBody.ReporterKy = 727795;
+                insertBody.Rem = "des";
+                insertBody.ReqDate = DateTime.Today;
 
+              
 
-
-
-                ////var client2 = new RestClient("http://bl360x.com/BLEcomTest/api");
-                ////var client = new RestClient("http://10.0.2.2:62185/api");
-                //var request2 = new RestRequest("http://bl360x.com/BLEcomTest/api/HR/ApplyLeave").AddJsonBody(tok);
-                //request2.Method = Method.Post;
-                //request2.AddHeader("Accept", "application/json");
-
-                //request2.AddHeader("IntegrationID", "1aa6a39b-5f54-4905-880a-a52733fd6105");
-                //request2.AddHeader("Authorization", tokn);
-                //request2.AddHeader("Content-Type", "application/json");
-
-
-                //RestResponse response2 = await client.PostAsync(request2);
-
-
-                //// check the status code of the response
-                //if (response2.StatusCode == HttpStatusCode.OK)
-                //{
-                //    // read the response data
-                //    var responsecontent = response2.Content.ToString();
-
-                //    Debug.WriteLine("submit succesful!!!");
-
-
-                //}
-                //else
-                //{
-                //    Debug.WriteLine("request failed with status code: " + response2.StatusCode);
-                //}
-
-
-                var request = new RestRequest("http://bl360x.com/BLEcomTest/api/HR/ApplyLeave").AddJsonBody(tok);
+                var client = new RestClient("http://bl360x.com/BLEcomTest/api");
+                var request = new RestRequest("/HR/ApplyLeave").AddJsonBody(insertBody);
                 request.Method = Method.Post;
                 request.AddHeader("Accept", "application/json");
 

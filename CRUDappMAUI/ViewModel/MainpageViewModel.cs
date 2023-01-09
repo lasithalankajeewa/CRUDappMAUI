@@ -11,7 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using static Android.Content.ClipData;
+//using static Android.Content.ClipData;
 
 namespace CRUDappMAUI.ViewModel
 {
@@ -20,7 +20,7 @@ namespace CRUDappMAUI.ViewModel
     {
 
         [ObservableProperty]
-        ObservableCollection<LeaveHistoryModel> _LHItems;
+        ObservableCollection<LeaveDetModel> _LHItems;
 
 
         public MainpageViewModel() {
@@ -28,12 +28,12 @@ namespace CRUDappMAUI.ViewModel
         
         }
 
-        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJMYXNpdGhhLkJMIiwiTGFzaXRoYS5CTCJdLCJuYW1laWQiOiJMYXNpdGhhLkJMIiwiRmlyc3ROYW1lIjoiTGFzaXRoYS5CTCIsIlVzZXJJZCI6Ikxhc2l0aGEuQkwiLCJFbWFpbCI6Ik5vIEVtYWlsIiwiQ0NEIjoiREMiLCJyb2xlIjoiQ29tcGFueUF1dGhTdWNjZXNzIiwibmJmIjoxNjczMTYzODg0LCJleHAiOjE2NzMyMDcwODQsImlhdCI6MTY3MzE2Mzg4NH0.PfpdCea6fqyPEJNuEvMK-1FNJ1mzbBbO-T3Yy-Yac04";
+        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJJc2hhbi5EQyIsIklzaGFuLkRDIl0sIm5hbWVpZCI6IklzaGFuLkRDIiwiRmlyc3ROYW1lIjoiSXNoYW4uREMiLCJVc2VySWQiOiJJc2hhbi5EQyIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiJEQyIsInJvbGUiOiJDb21wYW55QXV0aFN1Y2Nlc3MiLCJuYmYiOjE2NzMyNjAyODUsImV4cCI6MTY3MzMwMzQ4NSwiaWF0IjoxNjczMjYwMjg1fQ.4E_yVM3t6wuraM58_YqlvjwbZR9uux2tgvmEBHTURsI";
 
 
 
 
-        public async Task<ObservableCollection<LeaveHistoryModel>> GetAppliedLeave()
+        public async Task<ObservableCollection<LeaveDetModel>> GetAppliedLeave()
         {
             try
 
@@ -41,8 +41,8 @@ namespace CRUDappMAUI.ViewModel
                 Debug.WriteLine("Get Leave History is running");
                 AlraedyApplyLeaveToken aalt = new AlraedyApplyLeaveToken();
 
-                aalt.CompanyId = 156;
-                aalt.UserKey = 342922;
+                aalt.UsrKy = 342922;
+                aalt.UsrId = "";
                 
 
 
@@ -67,9 +67,11 @@ namespace CRUDappMAUI.ViewModel
                     // Read the response data
                     var responseContent = response.Content.ToString();
 
-                    List<LeaveHistoryModel> leaveItem = JsonConvert.DeserializeObject<List<LeaveHistoryModel>>(responseContent);
+                    Debug.WriteLine(responseContent);
 
-                    LHItems = new ObservableCollection<LeaveHistoryModel>(leaveItem);
+                    List<LeaveDetModel> leaveItem = JsonConvert.DeserializeObject<List<LeaveDetModel>>(responseContent);
+
+                    LHItems = new ObservableCollection<LeaveDetModel>(leaveItem);
 
 
 

@@ -8,8 +8,8 @@ namespace CRUDappMAUI.Models
 {
     public class AlraedyApplyLeaveToken
     {
-        public int CompanyId { get; set; }
+        public int UsrKy { get; set; }
 
-        public int UserKey { get; set; }
+        public string UsrId { get; set; }
     }
 }

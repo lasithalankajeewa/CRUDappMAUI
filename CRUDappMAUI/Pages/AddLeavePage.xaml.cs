@@ -52,4 +52,14 @@ public partial class AddLeavePage : ContentPage
     {
         leavemodel.OnPickerChanged();
     }
+
+    private void date2Chamged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        leavemodel.OnDate2Chaged();
+    }
+
+    private void time2changed(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        leavemodel.OnTime2Chaged();
+    }
 }

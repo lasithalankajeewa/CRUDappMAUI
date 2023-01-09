@@ -66,4 +66,6 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionCRUDappMAUIHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>

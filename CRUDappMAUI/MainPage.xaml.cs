@@ -33,21 +33,6 @@ public partial class MainPage : ContentPage
 
     }
 
-    public void IsRefreshing()
-    {
-        Debug.WriteLine("--IS refresh Clicked");
-    }
-
-    //async void OnPickerSelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    var picker = (Picker)sender;
-    //    int selectedIndex = picker.SelectedIndex;
-
-    //    if (selectedIndex != -1)
-    //    {
-    //        this.ShowPopup(new SortPopup());
-    //    }
-    //}
-
+    
 }
 

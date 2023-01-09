@@ -187,7 +187,8 @@
                                     Date="{Binding Date2}"
                                     FontAttributes="Bold" FontSize="Medium"
                                     Grid.Row="1"
-                                    Grid.Column="1"/>
+                                    Grid.Column="1"
+                                    PropertyChanged="date2Chamged"/>
                     </Grid>
 
 
@@ -199,7 +200,7 @@
                         FontAttributes="Bold" FontSize="Medium"
                         Keyboard="Numeric"
                         IsEnabled="False"/>
-                    <!--<Label Text="{Binding Nodays,Mode=TwoWay}"  FontSize="Medium"/>-->
+                   
 
                     <Grid RowSpacing="6">
                         <Grid.RowDefinitions>
@@ -213,28 +214,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Label   FontSize="Small" Text="Is First Half Day" Grid.Row="0" Grid.Column="0">
-                            <!--<Label.Triggers>
-                                <DataTrigger TargetType="Label"
-                                             Binding="{Binding Source={x:Reference styleSwitch1}, Path=IsToggled}"
-                                             Value="true">
-                                    <Setter Property="FontAttributes"
-                                                        Value="Bold" />
-                                    <Setter Property="FontSize"
-                                                        Value="Small" />
-                                </DataTrigger>
-                            </Label.Triggers>-->
+                            
                         </Label>
                         <Label  FontSize="Small" Text="Is Second Half Day" Grid.Row="1" Grid.Column="0">
-                            <!--<Label.Triggers>
-                                <DataTrigger TargetType="Label"
-                                                Binding="{Binding Source={x:Reference styleSwitch2}, Path=IsToggled}"
-                                                Value="true">
-                                    <Setter Property="FontAttributes"
-                                            Value="Bold" />
-                                    <Setter Property="FontSize"
-                                            Value="Medium" />
-                                </DataTrigger>
-                            </Label.Triggers>-->
+                            
                         </Label>
 
                         <Switch x:Name="Switch1"
@@ -280,28 +263,29 @@
                         <Label  FontAttributes="Bold" FontSize="Medium"  Grid.Row="0" Grid.Column="1">Short Leave End Time</Label>
 
                         <TimePicker 
-                            Time="{Binding Time1}"
+                            Time="{Binding Time1,Mode=TwoWay}"
                             FontSize="Medium"
                             Grid.Column="0"
                             Grid.Row="1"
                             x:Name="time1"
-                            IsEnabled="{Binding Time1IsEnabled}"/>
+                            IsEnabled="{Binding Time1IsEnabled,Mode=TwoWay}"/>
 
 
                         <TimePicker
-                            Time="{Binding Time2}"
+                            Time="{Binding Time2,Mode=TwoWay}"
                             FontSize="Medium"
                             Grid.Column="1"
                             Grid.Row="1"
                             x:Name="time2"
-                            IsEnabled="{Binding Time2IsEnabled}"/>
+                            PropertyChanged="time2changed"
+                            IsEnabled="{Binding Time2IsEnabled,Mode=TwoWay}"/>
                     </Grid>
 
 
                     <Label FontAttributes="Bold" FontSize="Medium">Short Leave Hour</Label>
                     <Entry 
                         x:Name="Leave_Hour"
-                        Text="{Binding Leavehours}"
+                        Text="{Binding Leavehours,Mode=TwoWay}"
                         Placeholder="Enter Short Leave Hour"
                         FontAttributes="Bold" FontSize="Medium"
                         Keyboard="Numeric"
@@ -315,7 +299,7 @@
 
 
 
-            <Button Text="Submit"
+            <Button Text="Apply Leave"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Command="{Binding SubmitClickedCommand}"/>
