@@ -20,20 +20,26 @@ namespace CRUDappMAUI.ViewModel
     {
 
         [ObservableProperty]
-        ObservableCollection<LeaveDetModel> _LHItems;
+        ObservableCollection<NewAppliedLeave> _LHItems;
 
+        
 
         public MainpageViewModel() {
             this.GetAppliedLeave();
         
         }
 
-        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJJc2hhbi5EQyIsIklzaGFuLkRDIl0sIm5hbWVpZCI6IklzaGFuLkRDIiwiRmlyc3ROYW1lIjoiSXNoYW4uREMiLCJVc2VySWQiOiJJc2hhbi5EQyIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiJEQyIsInJvbGUiOiJDb21wYW55QXV0aFN1Y2Nlc3MiLCJuYmYiOjE2NzMyNjAyODUsImV4cCI6MTY3MzMwMzQ4NSwiaWF0IjoxNjczMjYwMjg1fQ.4E_yVM3t6wuraM58_YqlvjwbZR9uux2tgvmEBHTURsI";
+        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJJc2hhbi5EQyIsIklzaGFuLkRDIl0sIm5hbWVpZCI6IklzaGFuLkRDIiwiRmlyc3ROYW1lIjoiSXNoYW4uREMiLCJVc2VySWQiOiJJc2hhbi5EQyIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiJEQyIsInJvbGUiOiJDb21wYW55QXV0aFN1Y2Nlc3MiLCJuYmYiOjE2NzMzMTgwMzMsImV4cCI6MTY3MzM2MTIzMywiaWF0IjoxNjczMzE4MDMzfQ.8vzOUrIeJzOoMeo1Ezzra4PuCsifxE02Zw7Vw0VRo2U";
 
 
+        [RelayCommand]
+        public async void Refresh()
+        { 
+            this.GetAppliedLeave();
+        }
 
 
-        public async Task<ObservableCollection<LeaveDetModel>> GetAppliedLeave()
+            public async Task<ObservableCollection<NewAppliedLeave>> GetAppliedLeave()
         {
             try
 
@@ -69,9 +75,9 @@ namespace CRUDappMAUI.ViewModel
 
                     Debug.WriteLine(responseContent);
 
-                    List<LeaveDetModel> leaveItem = JsonConvert.DeserializeObject<List<LeaveDetModel>>(responseContent);
+                    List<NewAppliedLeave> leaveItem = JsonConvert.DeserializeObject<List<NewAppliedLeave>>(responseContent);
 
-                    LHItems = new ObservableCollection<LeaveDetModel>(leaveItem);
+                    LHItems = new ObservableCollection<NewAppliedLeave>(leaveItem);
 
 
 

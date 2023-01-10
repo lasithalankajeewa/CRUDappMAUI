@@ -55,57 +55,59 @@
             
         </Grid>
 
-       
 
-        <RefreshView    >
-        <CollectionView VerticalOptions="FillAndExpand" 
-                        IsGrouped="True" 
-                        ItemsSource="{Binding LHItems}">
-           
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:LeaveDetModel">
-                    <VerticalStackLayout Margin="0,5,0,5">
-                        <Frame Padding="10" 
-                               BackgroundColor="LightGrey">
-                            
-                            <Grid>
+
+        <RefreshView Command="{Binding RefreshCommand}">
+        
+
+
+            <CollectionView 
+                                 ItemsSource="{Binding LHItems}"
+                                 SelectionMode="None"
+                                 HorizontalOptions="Center"
+                                 >
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:NewAppliedLeave">
+                        <Frame 
+                        
+                                    Opacity="0.8"
+                                    BackgroundColor="LightBlue"
+                                    
+                                    CornerRadius="5"
+                                    Padding="10">
+                            <VerticalStackLayout>
+                                <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
 
+
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
 
                                     </Grid.ColumnDefinitions>
-                                    
-                                <Label Text="{Binding LeaveType}" FontSize="Header" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                
-                                <Label Text="{Binding FromD}" Grid.Row="0" Grid.Column="1"/>
-                                
-                                <Label Text="{Binding  EftvDt}" Grid.Row="0" Grid.Column="2"/>
-                                
-                                <Label Text="{Binding  LevDays}" Grid.Row="0" Grid.Column="3"/>
-                               
-                                <Label Text="{Binding  IsCd}" Grid.Row="0" Grid.Column="4"/>
-                                
-                                <Label Text="{Binding Status}" Grid.Row="0" Grid.Column="5"/>
-                                
-                                <Label Text="{Binding LevReason}" Grid.Row="0" Grid.Column="6"/>
-                            </Grid>
+                                    <Label Text="{Binding LeaveType}" Grid.Row="0" Grid.Column="0"/>
+                                    <Label Text="{Binding FromD}" Grid.Row="0" Grid.Column="1"/>
+                                    <Label Text="{Binding EftvDt}" Grid.Row="0" Grid.Column="2"/>
+                                    <Label Text="{Binding LevDays}" Grid.Row="0" Grid.Column="3"/>
+                                    <Label Text="{Binding IsCd}" Grid.Row="0" Grid.Column="4"/>
+                                    <Label Text="{Binding Status}" Grid.Row="0" Grid.Column="6"/>
+                                    <Label Text="{Binding LevReason}" Grid.Row="0" Grid.Column="6"/>
 
+                                </Grid>
+                            </VerticalStackLayout>
                         </Frame>
-                    </VerticalStackLayout>
 
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-            
-        </CollectionView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </RefreshView>
 
     </StackLayout>
