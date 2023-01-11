@@ -22,6 +22,9 @@ namespace CRUDappMAUI.ViewModel
         [ObservableProperty]
         ObservableCollection<NewAppliedLeave> _LHItems;
 
+        [ObservableProperty]
+        bool _IsRefreshing;
+
         
 
         public MainpageViewModel() {
@@ -36,6 +39,7 @@ namespace CRUDappMAUI.ViewModel
         public async void Refresh()
         { 
             this.GetAppliedLeave();
+            IsRefreshing= false;
         }
 
 

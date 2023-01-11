@@ -152,7 +152,7 @@ namespace CRUDappMAUI.ViewModel
             return true;
         }
 
-        int LTTK;
+        int LTTK,LRK;
 
         [RelayCommand]
         public async void SubmitClicked()
@@ -206,6 +206,22 @@ namespace CRUDappMAUI.ViewModel
                 }
 
 
+                if (Pick2Index == 0)
+                {
+                    LRK = 310641;
+                }
+                else if (Pick2Index == 1)
+                {
+                    LRK = 310640;
+                }
+                else if (Pick2Index == 2)
+                {
+                    LRK = 310639;
+                }
+
+
+
+
                 Leaverequest insertBody = new Leaverequest();
                 insertBody.ObjKy = 1;
                 insertBody.EmpKy = 874258;
@@ -213,7 +229,7 @@ namespace CRUDappMAUI.ViewModel
                 lt.CodeKey = LTTK;
 
                 CodeBaseResponse lr = new CodeBaseResponse();
-                lr.CodeKey = 1;
+                lr.CodeKey = LRK;
 
                 insertBody.LeaveType = lt;
                 insertBody.LevReason = lr;

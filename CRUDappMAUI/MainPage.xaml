@@ -57,7 +57,9 @@
 
 
 
-        <RefreshView Command="{Binding RefreshCommand}">
+        <RefreshView 
+            IsRefreshing="{Binding IsRefreshing,Mode=TwoWay}"
+            Command="{Binding RefreshCommand}">
         
 
 

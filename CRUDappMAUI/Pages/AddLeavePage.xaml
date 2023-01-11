@@ -144,7 +144,7 @@
                         </Picker.Items>
                         
                     </Picker>
-                    <Picker x:Name="Reason" SelectedItem="{Binding Pick2}" Title="Reason"  FontAttributes="Bold" FontSize="Medium">
+                    <Picker x:Name="Reason" SelectedIndex="{Binding Pick2Index}" SelectedItem="{Binding Pick2}" Title="Reason"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
                             <x:String>Personal-Personal Work</x:String>
                             <x:String>Sick-Sick</x:String>
@@ -154,9 +154,8 @@
                     </Picker>
                     <Picker x:Name="ReportingPerson" SelectedItem="{Binding Pick3}" Title="Reporting Person"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
-                            <x:String>001-Kumara</x:String>
-                            <x:String>002-Devinda</x:String>
-                            <x:String>003-Rajesh</x:String>
+                            <x:String>001-Ishara</x:String>
+                            
 
                         </Picker.Items>
                     </Picker>
