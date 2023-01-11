@@ -19,8 +19,8 @@ namespace CRUDappMAUI.Models
         public int LeaveTypeKy { get; set; }
         public float LevDays { get; set; }
         public object EntitlesD { get; set; }
-        public object FromD { get; set; }
-        public string ToD { get; set; }
+        public string FromD { get; set; }
+        public DateTime ToD { get; set; }
         public string EmpNm { get; set; }
         public int EmpKy { get; set; }
         public bool IsFirstHalf { get; set; }

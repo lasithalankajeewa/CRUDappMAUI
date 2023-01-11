@@ -75,7 +75,8 @@
                                     BackgroundColor="LightBlue"
                                     
                                     CornerRadius="5"
-                                    Padding="10">
+                                    Padding="10"
+                                    Margin="5">
                             <VerticalStackLayout>
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -95,7 +96,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding LeaveType}" Grid.Row="0" Grid.Column="0"/>
                                     <Label Text="{Binding FromD}" Grid.Row="0" Grid.Column="1"/>
-                                    <Label Text="{Binding EftvDt}" Grid.Row="0" Grid.Column="2"/>
+                                    <Label Text="{Binding ToD.Date}" Grid.Row="0" Grid.Column="2"/>
                                     <Label Text="{Binding LevDays}" Grid.Row="0" Grid.Column="3"/>
                                     <Label Text="{Binding IsCd}" Grid.Row="0" Grid.Column="4"/>
                                     <Label Text="{Binding Status}" Grid.Row="0" Grid.Column="6"/>
