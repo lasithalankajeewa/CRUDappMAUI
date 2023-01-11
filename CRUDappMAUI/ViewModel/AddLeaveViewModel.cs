@@ -27,6 +27,8 @@ namespace CRUDappMAUI.ViewModel
         [ObservableProperty]
         ObservableCollection<LeaveSumModel> _LItems;
 
+        [ObservableProperty]
+        string _error="";
 
         [ObservableProperty]
         ObservableCollection<string> _Items;
@@ -148,6 +150,7 @@ namespace CRUDappMAUI.ViewModel
         [RelayCommand]
         public async void SubmitClicked()
         {
+            
             try
             {
 
@@ -191,7 +194,7 @@ namespace CRUDappMAUI.ViewModel
 
                 insertBody.LeaveType = lt;
                 insertBody.LevReason = lr;
-                insertBody.LeaveTrnKy = 1;
+                insertBody.LeaveTrnKy = 0;
                 insertBody.LeaveTrnTypKy = 221749;
                 insertBody.EftvDt = Date1;
                 insertBody.ToD = Date2;

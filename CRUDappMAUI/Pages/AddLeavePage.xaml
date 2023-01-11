@@ -29,10 +29,11 @@
                     <Frame 
                         
                         Opacity="0.8"
-                        BackgroundColor="LightBlue"
+                        BackgroundColor="LightSteelBlue"
                         
                         CornerRadius="10"
-                        Padding="15">
+                        Padding="15"
+                        >
                         <StackLayout>
                             <Grid
                                 >
@@ -69,13 +70,14 @@
 
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="models:LeaveSumModel">
-                                        <Frame 
+                                        <Frame
                         
                                     Opacity="0.8"
-                                    BackgroundColor="LightGray"
-                                    
+                                    BackgroundColor="LightGrey" 
                                     CornerRadius="5"
-                                    Padding="5">
+                                    Padding="10"
+                                    Margin="3"
+                                    BorderColor="LightGrey"        >
                                             <VerticalStackLayout>
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -297,8 +299,13 @@
 
             </Frame>
 
-
-
+            <!--<Label Text="{Binding Error,Mode=TwoWay}" 
+                   FontAttributes="Bold" 
+                   FontSize="Medium" 
+                   TextColor="Red" 
+                   BackgroundColor="WhiteSmoke" 
+                   Padding="5"
+                   />-->
             <Button Text="Apply Leave"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"

@@ -95,11 +95,11 @@
 
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding LeaveType}" Grid.Row="0" Grid.Column="0"/>
-                                    <Label Text="{Binding FromD}" Grid.Row="0" Grid.Column="1"/>
-                                    <Label Text="{Binding ToD.Date}" Grid.Row="0" Grid.Column="2"/>
+                                    <Label Text="{Binding EftvDt,StringFormat='{}{0:MM/dd/yyyy}'}" Grid.Row="0" Grid.Column="1"/>
+                                    <Label Text="{Binding ToD,StringFormat='{}{0:MM/dd/yyyy}'}" Grid.Row="0" Grid.Column="2"/>
                                     <Label Text="{Binding LevDays}" Grid.Row="0" Grid.Column="3"/>
                                     <Label Text="{Binding IsCd}" Grid.Row="0" Grid.Column="4"/>
-                                    <Label Text="{Binding Status}" Grid.Row="0" Grid.Column="6"/>
+                                    <Label Text="{Binding Status}" Grid.Row="0" Grid.Column="5"/>
                                     <Label Text="{Binding LevReason}" Grid.Row="0" Grid.Column="6"/>
 
                                 </Grid>

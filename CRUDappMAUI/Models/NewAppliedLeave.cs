@@ -26,7 +26,7 @@ namespace CRUDappMAUI.Models
         public bool IsFirstHalf { get; set; }
         public bool IsSecondHalf { get; set; }
         public int ReporterKey { get; set; }
-        public string EftvDt { get; set; }
+        public DateTime EftvDt { get; set; }
         public int IsCd { get; set; }
         public DateTime Year { get; set; }
         public float Taken { get; set; }
