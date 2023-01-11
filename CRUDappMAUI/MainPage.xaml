@@ -97,8 +97,20 @@
                                     <Label Text="{Binding LeaveType}" Grid.Row="0" Grid.Column="0"/>
                                     <Label Text="{Binding EftvDt,StringFormat='{}{0:MM/dd/yyyy}'}" Grid.Row="0" Grid.Column="1"/>
                                     <Label Text="{Binding ToD,StringFormat='{}{0:MM/dd/yyyy}'}" Grid.Row="0" Grid.Column="2"/>
-                                    <Label Text="{Binding LevDays}" Grid.Row="0" Grid.Column="3"/>
-                                    <Label Text="{Binding IsCd}" Grid.Row="0" Grid.Column="4"/>
+                                    <Label Text="{Binding Taken}" Grid.Row="0" Grid.Column="3"/>
+                                    <!--<Label Text="{Binding IsCd}" Grid.Row="0" Grid.Column="4"/>-->
+                                    <Label Grid.Row="0" Grid.Column="4">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Text" Value="Days"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsCd}" Value="1">
+                                                        <Setter Property="Text" Value="Hours"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
                                     <Label Text="{Binding Status}" Grid.Row="0" Grid.Column="5"/>
                                     <Label Text="{Binding LevReason}" Grid.Row="0" Grid.Column="6"/>
 

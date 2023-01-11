@@ -40,6 +40,12 @@ namespace CRUDappMAUI.ViewModel
         int _pick1Index;
 
         [ObservableProperty]
+        int _pick2Index;
+
+        [ObservableProperty]
+        int _pick3Index;
+
+        [ObservableProperty]
         string _pick2;
 
         [ObservableProperty]
@@ -117,7 +123,7 @@ namespace CRUDappMAUI.ViewModel
 
         public void OnPickerChanged()
         {
-            if (Pick1Index == 3)
+            if (Pick1Index == 2)
             {
 
                 Time1IsEnabled = true;
@@ -146,6 +152,7 @@ namespace CRUDappMAUI.ViewModel
             return true;
         }
 
+        int LTTK;
 
         [RelayCommand]
         public async void SubmitClicked()
@@ -153,7 +160,7 @@ namespace CRUDappMAUI.ViewModel
             
             try
             {
-
+                
                 Debug.WriteLine(_pick1);
                 Debug.WriteLine(_pick2);
                 Debug.WriteLine(_pick3);
@@ -183,11 +190,27 @@ namespace CRUDappMAUI.ViewModel
 
                 //post request
 
+                
+
+                if (Pick1Index == 0)
+                {
+                    LTTK = 221698;
+                }
+                else if (Pick1Index == 1)
+                {
+                    LTTK = 221681;
+                }
+                else if (Pick1Index == 2)
+                {
+                    LTTK = 221680;
+                }
+
+
                 Leaverequest insertBody = new Leaverequest();
                 insertBody.ObjKy = 1;
                 insertBody.EmpKy = 874258;
                 CodeBaseResponse lt = new CodeBaseResponse();
-                lt.CodeKey = 221681;
+                lt.CodeKey = LTTK;
 
                 CodeBaseResponse lr = new CodeBaseResponse();
                 lr.CodeKey = 1;

@@ -97,9 +97,21 @@
                                                 <Label Text="{Binding Elagible}" Grid.Row="0" Grid.Column="1"/>
                                                 <Label Text="{Binding Taken}" Grid.Row="0" Grid.Column="2"/>
                                                 <Label Text="{Binding Bal}" Grid.Row="0" Grid.Column="3"/>
-                                                <Label Text="{Binding IsCd01}" Grid.Row="0" Grid.Column="4"/>
+                                                <!--<Label Text="{Binding IsCd01}" Grid.Row="0" Grid.Column="4"/>-->
+                                                    <Label Grid.Row="0" Grid.Column="4">
+                                                        <Label.Style>
+                                                            <Style TargetType="Label">
+                                                                <Setter Property="Text" Value="Days"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger TargetType="Label" Binding="{Binding IsCd01}" Value="1">
+                                                                        <Setter Property="Text" Value="Hours"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Label.Style>
+                                                    </Label>
 
-                                            </Grid>
+                                                </Grid>
                                             </VerticalStackLayout>
                                         </Frame>
 
@@ -127,17 +139,10 @@
                         <Picker.Items>
                             <x:String>Annually-Annual Leave</x:String>
                             <x:String>Casually-Casual Leave</x:String>
-                            <x:String>Maternity-Maternity Leave</x:String>
                             <x:String>Short-Short Leave</x:String>
 
                         </Picker.Items>
-                        <!--<x:Array Type="{x:Type x:String}">
-                            <x:String>Annually-Annual Leave</x:String>
-                            <x:String>Casually-Casual Leave</x:String>
-                            <x:String>Maternity-Maternity Leave</x:String>
-                            <x:String>Short-Short Leave</x:String>
-
-                        </x:Array>-->
+                        
                     </Picker>
                     <Picker x:Name="Reason" SelectedItem="{Binding Pick2}" Title="Reason"  FontAttributes="Bold" FontSize="Medium">
                         <Picker.Items>
