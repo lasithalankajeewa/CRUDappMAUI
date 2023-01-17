@@ -181,7 +181,7 @@
                         <DatePicker 
                             
                                     x:Name="fromdate"
-                                    Date="{Binding Date1}"
+                                    Date="{Binding Date1,StringFormat='{}{0:dd/MM/yyyy}'}"
                                     FontAttributes="Bold" FontSize="Medium"
                                     Grid.Column="0"
                                     Grid.Row="1"        />
@@ -190,7 +190,7 @@
                         <DatePicker 
                                     
                                     x:Name="todate"
-                                    Date="{Binding Date2}"
+                                    Date="{Binding Date2,StringFormat='{}{0:dd/MM/yyyy}'}"
                                     FontAttributes="Bold" FontSize="Medium"
                                     Grid.Row="1"
                                     Grid.Column="1"

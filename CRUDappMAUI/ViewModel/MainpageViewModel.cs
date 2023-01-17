@@ -32,7 +32,7 @@ namespace CRUDappMAUI.ViewModel
         
         }
 
-        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJJc2hhbi5EQyIsIklzaGFuLkRDIl0sIm5hbWVpZCI6IklzaGFuLkRDIiwiRmlyc3ROYW1lIjoiSXNoYW4uREMiLCJVc2VySWQiOiJJc2hhbi5EQyIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiJEQyIsInJvbGUiOiJDb21wYW55QXV0aFN1Y2Nlc3MiLCJuYmYiOjE2NzM0MDY3OTAsImV4cCI6MTY3MzQ0OTk5MCwiaWF0IjoxNjczNDA2NzkwfQ.opcmZAcUwoVJmCkMP2a1VpETnzgH8hOmx9_IEk1D-Hs";
+        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJJc2hhbi5EQyIsIklzaGFuLkRDIl0sIm5hbWVpZCI6IklzaGFuLkRDIiwiRmlyc3ROYW1lIjoiSXNoYW4uREMiLCJVc2VySWQiOiJJc2hhbi5EQyIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiJEQyIsInJvbGUiOiJDb21wYW55QXV0aFN1Y2Nlc3MiLCJuYmYiOjE2NzM5MjUxMDUsImV4cCI6MTY3Mzk2ODMwNSwiaWF0IjoxNjczOTI1MTA1fQ.PcDQkyG3o9GFAeqioAeOHk_7_HEpUBrAMR3-2CDXMWs";
 
 
         [RelayCommand]

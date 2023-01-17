@@ -61,7 +61,7 @@ namespace CRUDappMAUI.ViewModel
         DateTime _date2 = DateTime.Today;
 
         [ObservableProperty]
-        int _nodays;
+        double _nodays;
 
         [ObservableProperty]
         bool _firsthalf;
@@ -82,7 +82,7 @@ namespace CRUDappMAUI.ViewModel
         bool _time2IsEnabled=false;
 
         [ObservableProperty]
-        double _leavehours;
+        TimeSpan _leavehours;
 
         [ObservableProperty]
         bool _leavehoursIsEnabled=false;
@@ -93,10 +93,15 @@ namespace CRUDappMAUI.ViewModel
 
 
 
+        int SLBal;
+        TimeSpan span;
+
+
         public void OnToggleSwitch( bool IsOn)
         {
             Firsthalf = IsOn;
             Secondhalf = !IsOn;
+            Nodays += 0.5;
 
         }
 
@@ -104,20 +109,24 @@ namespace CRUDappMAUI.ViewModel
         {
             Secondhalf = IsOn;
             Firsthalf = !IsOn;
-            
+            Nodays += 0.5;
 
         }
 
         public void OnDate2Chaged() {
             TimeSpan difference = Date2 - Date1;
-            Nodays = difference.Days;
+            Nodays = difference.Days+1;
 
         }
 
         public void OnTime2Chaged()
         {
-            TimeSpan span = Time2.Subtract(Time1);
-            Leavehours = span.Hours;
+            span = Time2.Subtract(Time1);
+            Leavehours = span;
+            if (span.Hours > SLBal)
+            {
+                ShowPopup2();
+            }
 
         }
 
@@ -129,6 +138,7 @@ namespace CRUDappMAUI.ViewModel
                 Time1IsEnabled = true;
                 Time2IsEnabled = true;
                 //LeavehoursIsEnabled = true;
+                
 
             }
             else {
@@ -141,13 +151,20 @@ namespace CRUDappMAUI.ViewModel
 
         }
 
-        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJJc2hhbi5EQyIsIklzaGFuLkRDIl0sIm5hbWVpZCI6IklzaGFuLkRDIiwiRmlyc3ROYW1lIjoiSXNoYW4uREMiLCJVc2VySWQiOiJJc2hhbi5EQyIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiJEQyIsInJvbGUiOiJDb21wYW55QXV0aFN1Y2Nlc3MiLCJuYmYiOjE2NzM0MDY3OTAsImV4cCI6MTY3MzQ0OTk5MCwiaWF0IjoxNjczNDA2NzkwfQ.opcmZAcUwoVJmCkMP2a1VpETnzgH8hOmx9_IEk1D-Hs";
+        public string tokn = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6WyJJc2hhbi5EQyIsIklzaGFuLkRDIl0sIm5hbWVpZCI6IklzaGFuLkRDIiwiRmlyc3ROYW1lIjoiSXNoYW4uREMiLCJVc2VySWQiOiJJc2hhbi5EQyIsIkVtYWlsIjoiTm8gRW1haWwiLCJDQ0QiOiJEQyIsInJvbGUiOiJDb21wYW55QXV0aFN1Y2Nlc3MiLCJuYmYiOjE2NzM5MjUxMDUsImV4cCI6MTY3Mzk2ODMwNSwiaWF0IjoxNjczOTI1MTA1fQ.PcDQkyG3o9GFAeqioAeOHk_7_HEpUBrAMR3-2CDXMWs";
 
         public ICommand ShowPopupCommand { get; }
 
         private bool ShowPopup()
         {
             var popup = new SortPopup();
+            Shell.Current.ShowPopup(popup);
+            return true;
+        }
+
+        private bool ShowPopup2()
+        {
+            var popup = new SLPopup();
             Shell.Current.ShowPopup(popup);
             return true;
         }
@@ -161,34 +178,12 @@ namespace CRUDappMAUI.ViewModel
             try
             {
                 
-                Debug.WriteLine(_pick1);
-                Debug.WriteLine(_pick2);
-                Debug.WriteLine(_pick3);
-                Debug.WriteLine(_text1);
-                Debug.WriteLine(_date1);
-                Debug.WriteLine(_date2);
-                Debug.WriteLine(Nodays);
-                Debug.WriteLine(_firsthalf);
-                Debug.WriteLine(_secondhalf);
-                Debug.WriteLine(_time1);
-                Debug.WriteLine(_time2);
-                //Debug.WriteLine(span.Hours);
-                Debug.WriteLine(_pick1Index);
+               
 
-                //trigger switch
-                if (Firsthalf)
-                {
-                    Firsthalf = !Firsthalf;
-                    Secondhalf = false;
-                }
-                else if (Secondhalf)
-                {
-                    Firsthalf = false;
-                    Secondhalf = !Secondhalf;
-                }
+               
 
 
-                //post request
+                //Set picker values
 
                 
 
@@ -203,6 +198,7 @@ namespace CRUDappMAUI.ViewModel
                 else if (Pick1Index == 2)
                 {
                     LTTK = 221680;
+                    
                 }
 
 
@@ -235,8 +231,20 @@ namespace CRUDappMAUI.ViewModel
                 insertBody.LevReason = lr;
                 insertBody.LeaveTrnKy = 0;
                 insertBody.LeaveTrnTypKy = 221749;
-                insertBody.EftvDt = Date1;
-                insertBody.ToD = Date2;
+                if (Pick1Index == 2)
+                {
+                    //insertBody.EftvDt = new DateTime() +  Time1;
+                    //insertBody.ToD = new DateTime() + Time2;
+                    insertBody.EftvDt = Date1;
+                    //insertBody.ToD = Date2;
+                    insertBody.ShortLeaveHours = span.Hours;
+                }
+                else
+                {
+                    insertBody.EftvDt = Date1;
+                    insertBody.ToD = Date2;
+                }
+                
                 insertBody.LevDays = Nodays+1;
                 insertBody.IsFirstHalf = Firsthalf;
                 insertBody.IsSecondHalf = Secondhalf;
@@ -327,8 +335,9 @@ namespace CRUDappMAUI.ViewModel
                     List<LeaveSumModel> leaveItem = JsonConvert.DeserializeObject<List<LeaveSumModel>>(responseContent);
 
                     LItems= new ObservableCollection<LeaveSumModel>(leaveItem);
+                    SLBal = LItems[0].Bal;
+                    Debug.WriteLine("BAL:" + LItems[0].Bal);
 
-                    
 
                     //Debug.WriteLine(leaveItem[0].LeaveType);
                     //Debug.WriteLine(LItems[0].Taken);

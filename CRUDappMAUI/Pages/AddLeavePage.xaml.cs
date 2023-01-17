@@ -20,8 +20,11 @@ public partial class AddLeavePage : ContentPage
         this.BindingContext= leavemodel;
 
         if (leavemodel.IsPopUp) {
-            var popup = new SortPopup();
-            this.ShowPopup(popup);
+            var popup1 = new SortPopup();
+            this.ShowPopup(popup1);
+
+            var pupup2=new SLPopup();
+            this.ShowPopup(pupup2);
         }
 
 
